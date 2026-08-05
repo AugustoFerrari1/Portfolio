@@ -1,0 +1,176 @@
+/* ============================================================
+   FrameLayout.module.css  —  solo el marco, sin nav
+   ============================================================ */
+
+/* ----------------------------------------------------------
+   WRAPPER — capa raíz + noise grain
+   ---------------------------------------------------------- */
+.wrapper {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: var(--color-bg);
+  isolation: isolate;
+}
+
+.wrapper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/* ----------------------------------------------------------
+   FRAME — el marco fijo
+   ---------------------------------------------------------- */
+.frame {
+  position: fixed;
+  inset: var(--frame-margin);
+  z-index: 1;
+  border: 1px solid var(--color-border);
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--color-bg);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+    0 0 80px rgba(0, 0, 0, 0.8);
+}
+
+/* ----------------------------------------------------------
+   FRAME CONTENT — área de vista SPA sin scroll
+   ---------------------------------------------------------- */
+.frameContent {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ----------------------------------------------------------
+   EDGE ELEMENTS
+   ---------------------------------------------------------- */
+.edgeLeft {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  z-index: 100;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+  pointer-events: none;
+  width: var(--frame-margin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edgeRight {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 100;
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: center center;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  white-space: nowrap;
+  pointer-events: none;
+  width: var(--frame-margin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edgeBottom {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  z-index: 100;
+  transform: translateX(-50%);
+  height: var(--frame-margin);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-text-dim);
+  pointer-events: none;
+}
+
+.pulse {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50%       { opacity: 1;   transform: scale(1); }
+}
+
+/* Corner markers */
+.cornerTL,
+.cornerTR,
+.cornerBL,
+.cornerBR {
+  position: fixed;
+  z-index: 100;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+}
+
+.cornerTL { top: calc(var(--frame-margin) - 1px);    left: calc(var(--frame-margin) - 1px); }
+.cornerTR { top: calc(var(--frame-margin) - 1px);    right: calc(var(--frame-margin) - 1px); }
+.cornerBL { bottom: calc(var(--frame-margin) - 1px); left: calc(var(--frame-margin) - 1px); }
+.cornerBR { bottom: calc(var(--frame-margin) - 1px); right: calc(var(--frame-margin) - 1px); }
+
+.cornerTL::before, .cornerTL::after,
+.cornerTR::before, .cornerTR::after,
+.cornerBL::before, .cornerBL::after,
+.cornerBR::before, .cornerBR::after {
+  content: '';
+  position: absolute;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.cornerTL::before, .cornerTR::before, .cornerBL::before, .cornerBR::before {
+  width: 8px; height: 1px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.cornerTL::after, .cornerTR::after, .cornerBL::after, .cornerBR::after {
+  width: 1px; height: 8px;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+@media (max-width: 640px) {
+  .edgeLeft, .edgeRight { display: none; }
+  .cornerTL, .cornerTR, .cornerBL, .cornerBR { display: none; }
+}

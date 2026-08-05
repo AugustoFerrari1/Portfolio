@@ -1,0 +1,63 @@
+/* ============================================================
+   CustomCursor.module.css — SVG precision concentric cursor
+   ============================================================ */
+
+.cursorWrapper {
+  position: fixed;
+  top: -20px;
+  left: -20px;
+  width: 40px;
+  height: 40px;
+  z-index: 99999;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.svgCursor {
+  width: 40px;
+  height: 40px;
+  overflow: visible;
+}
+
+/* Anillo exterior */
+.outerRing {
+  transform-origin: 20px 20px;
+  transition:
+    r 220ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke 200ms ease,
+    fill 200ms ease,
+    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Punto central */
+.innerDot {
+  transform-origin: 20px 20px;
+  transition:
+    r 180ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 200ms ease,
+    transform 180ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Estado Hover: la circunferencia se agranda y el punto se acentúa */
+.hovered .outerRing {
+  r: 15;
+  stroke: rgba(255, 255, 255, 0.95);
+  fill: rgba(255, 255, 255, 0.08);
+}
+
+.hovered .innerDot {
+  r: 3;
+  fill: #ffffff;
+}
+
+/* Estado Click (mousedown): contracción elástica reactiva */
+.clicked .outerRing {
+  transform: scale(0.72);
+  stroke: #ffffff;
+  fill: rgba(255, 255, 255, 0.25);
+}
+
+.clicked .innerDot {
+  transform: scale(1.6);
+  fill: #ffffff;
+}

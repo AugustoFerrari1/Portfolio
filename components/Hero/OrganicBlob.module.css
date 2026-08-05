@@ -1,0 +1,20 @@
+/* ─── Variant Classes ─────────────────────────────────────────────────────── */
+/*
+  NOTE (perf): CSS drift keyframes (blobDriftTL/TR/BL/BR) were removed.
+  They animated `transform` on the same element as the JS parallax hook
+  (useParallaxBlobs), causing a conflict where the JS overwrote the CSS
+  animation every frame anyway — spending GPU budget for nothing.
+
+  Idle drift is now handled directly in useParallaxBlobs via a sinusoidal
+  offset when the mouse hasn't moved, giving full control from one place.
+
+  `will-change: transform` is declared only on `.blobParallax` in
+  Hero.module.css (the JS layer), not here — no need to double it.
+*/
+
+.blob--tl,
+.blob--tr,
+.blob--bl,
+.blob--br {
+  display: block;
+}

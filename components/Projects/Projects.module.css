@@ -1,0 +1,398 @@
+/* ============================================================
+   Projects.module.css
+   Diseño flotante conectado con el fondo del sitio (SPA 100dvh)
+   ============================================================ */
+.section {
+    position: relative;
+    width: 100%;
+    height: 100dvh;
+    min-height: 100dvh;
+    max-height: 100dvh;
+    overflow: hidden;
+    background: transparent;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ----------------------------------------------------------
+   BLOBS DE FONDO (conectados con Hero / inicio)
+   ---------------------------------------------------------- */
+.blobLayer {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    filter: blur(60px);
+    opacity: 0.55;
+}
+
+/* ----------------------------------------------------------
+   CAPA DE BLUR & ROOT BG TRASLÚCIDO (sobre HeroBackground)
+   ---------------------------------------------------------- */
+.blurOverlay {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: rgba(16, 14, 20, 0.72);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
+.blob {
+    position: absolute;
+    pointer-events: none;
+    will-change: transform, border-radius;
+}
+
+.blob1 {
+    top: -10%;
+    left: -5%;
+    width: clamp(300px, 40vw, 550px);
+    height: clamp(240px, 30vw, 450px);
+    background: linear-gradient(135deg, #7C3AED 0%, #A855F7 45%, #EC4899 100%);
+    border-radius: 43% 57% 67% 33% / 49% 41% 59% 51%;
+    animation: morph1 14s ease-in-out infinite;
+}
+
+.blob2 {
+    top: -15%;
+    right: -5%;
+    width: clamp(300px, 42vw, 580px);
+    height: clamp(260px, 35vw, 500px);
+    background: linear-gradient(140deg, #2563EB 0%, #3B82F6 40%, #22D3EE 100%);
+    border-radius: 55% 45% 38% 62% / 52% 63% 37% 48%;
+    animation: morph3 16s ease-in-out infinite;
+}
+
+.blob3 {
+    bottom: -15%;
+    left: -8%;
+    width: clamp(260px, 36vw, 480px);
+    height: clamp(260px, 36vw, 480px);
+    background: linear-gradient(135deg, #84CC16 0%, #22C55E 50%, #10B981 100%);
+    border-radius: 60% 40% 55% 45% / 42% 58% 42% 58%;
+    animation: morph4 18s ease-in-out infinite;
+}
+
+.blob4 {
+    bottom: -10%;
+    right: 15%;
+    width: clamp(240px, 32vw, 440px);
+    height: clamp(220px, 28vw, 400px);
+    background: linear-gradient(130deg, #FBBF24 0%, #F59E0B 55%, #EA580C 100%);
+    border-radius: 38% 62% 53% 47% / 55% 44% 56% 45%;
+    animation: morph5 13s ease-in-out infinite;
+}
+
+@keyframes morph1 {
+
+    0%,
+    100% {
+        border-radius: 43% 57% 67% 33% / 49% 41% 59% 51%;
+        transform: translate(0, 0);
+    }
+
+    50% {
+        border-radius: 62% 38% 48% 52% / 55% 35% 65% 45%;
+        transform: translate(8px, -6px);
+    }
+}
+
+@keyframes morph3 {
+
+    0%,
+    100% {
+        border-radius: 55% 45% 38% 62% / 52% 63% 37% 48%;
+        transform: translate(0, 0);
+    }
+
+    50% {
+        border-radius: 40% 60% 55% 45% / 45% 55% 50% 50%;
+        transform: translate(-10px, 6px);
+    }
+}
+
+@keyframes morph4 {
+
+    0%,
+    100% {
+        border-radius: 60% 40% 55% 45% / 42% 58% 42% 58%;
+        transform: translate(0, 0);
+    }
+
+    50% {
+        border-radius: 45% 55% 40% 60% / 55% 45% 58% 42%;
+        transform: translate(6px, -4px);
+    }
+}
+
+@keyframes morph5 {
+
+    0%,
+    100% {
+        border-radius: 38% 62% 53% 47% / 55% 44% 56% 45%;
+        transform: translate(0, 0);
+    }
+
+    50% {
+        border-radius: 56% 44% 42% 58% / 48% 56% 44% 52%;
+        transform: translate(-6px, -4px);
+    }
+}
+
+/* ----------------------------------------------------------
+   GRAIN DE FONDO
+   ---------------------------------------------------------- */
+.grain {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0.18;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 180px 180px;
+}
+
+/* ----------------------------------------------------------
+   INNER — Grid de 2 columnas
+   ---------------------------------------------------------- */
+.inner {
+    position: relative;
+    z-index: 3;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 48% 52%;
+    align-items: stretch;
+    height: 100%;
+    padding-top: clamp(60px, 8vh, 85px);
+}
+
+/* ----------------------------------------------------------
+   LEFT COLUMN — Imagen flotante cubriendo abajo/izq y un poco más arriba
+   ---------------------------------------------------------- */
+.leftColumn {
+    display: flex;
+    align-items: stretch;
+    justify-content: flex-end;
+    padding: max(20px, calc((100% - clamp(340px, 50vh, 540px)) / 2 - 36px)) 0 0 0;
+    height: 100%;
+}
+
+.floatingCard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    border-top-right-radius: clamp(24px, 3.5vw, 40px);
+    overflow: hidden;
+    box-shadow:
+        10px 0 40px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 255, 255, 0.12);
+    background: rgba(16, 14, 20, 0.65);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    /* transición para aparecer/desaparecer */
+    transition:
+        opacity 350ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 350ms cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 350ms ease;
+}
+
+/* Ocultar la caja negra cuando no hay proyecto seleccionado */
+.floatingCardHidden {
+    opacity: 0;
+    transform: scale(0.98);
+    box-shadow: none;
+    pointer-events: none;
+}
+
+.cardImage {
+    position: absolute;
+    inset: clamp(24px, 4vw, 56px);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0;
+    transform: scale(0.95);
+    transition:
+        opacity 450ms cubic-bezier(0.4, 0, 0.2, 1),
+        transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardImageActive {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.cardOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.1) 0%,
+            transparent 40%,
+            transparent 70%,
+            rgba(0, 0, 0, 0.25) 100%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* ----------------------------------------------------------
+   RIGHT COLUMN — Lista de proyectos alineada exactamente en altura
+   ---------------------------------------------------------- */
+.rightColumn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 0 clamp(24px, 5vw, 64px);
+    height: 100%;
+}
+
+.tableWrapper {
+    width: 100%;
+    max-width: 580px;
+    height: clamp(340px, 50vh, 540px);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+}
+
+.listHeader {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+    margin-bottom: 6px;
+}
+
+.heading {
+    font-family: var(--font-feixen);
+    font-size: clamp(22px, 3.2vw, 44px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 1;
+}
+
+.count {
+    font-size: 13px;
+    font-family: var(--font-feixen);
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.35);
+    font-variant-numeric: tabular-nums;
+}
+
+/* ----------------------------------------------------------
+   LIST ITEMS
+   ---------------------------------------------------------- */
+.list {
+    list-style: none;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: clamp(14px, 2.2vh, 22px) 0;
+    position: relative;
+    cursor: pointer;
+    transition: padding-left 250ms ease;
+}
+
+.itemLeft {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Flecha → que se expande empujando el texto a la derecha */
+.arrowBadge {
+    background: none;
+    font-size: clamp(14px, 1.4vw, 18px);
+    color: rgba(255, 255, 255, 0.9);
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    opacity: 0;
+    flex-shrink: 0;
+    line-height: 1;
+    /* Ancho se expande → empuja el texto */
+    transition:
+        width 280ms cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 200ms ease;
+}
+
+.arrowBadgeActive {
+    width: 22px;
+    opacity: 1;
+}
+
+.title {
+    font-family: var(--font-feixen);
+    font-size: clamp(16px, 1.8vw, 24px);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 250ms ease;
+    line-height: 1;
+}
+
+.itemActive .title {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.category {
+    font-size: clamp(11px, 0.9vw, 13px);
+    font-family: var(--font-feixen);
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.25);
+    white-space: nowrap;
+    transition: color 250ms ease;
+}
+
+.itemActive .category {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.itemLine {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    transition: background 250ms ease;
+}
+
+.itemActive .itemLine {
+    background: rgba(255, 255, 255, 0.18);
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+@media (max-width: 768px) {
+    .inner {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr;
+    }
+
+    .leftColumn {
+        padding: 16px 20px;
+    }
+
+    .floatingCard {
+        max-width: 100%;
+        aspect-ratio: 16 / 10;
+    }
+
+    .rightColumn {
+        padding: 16px 20px;
+    }
+}

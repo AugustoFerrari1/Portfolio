@@ -1,0 +1,155 @@
+/* ============================================================
+   Contact.module.css
+   Página de contacto — estilo editorial minimalista
+   Mismo glassmorphism base que Projects / About
+   ============================================================ */
+
+.section {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ----------------------------------------------------------
+   GLASSMORPHISM OVERLAY (igual que Projects / About)
+   ---------------------------------------------------------- */
+.blurOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: rgba(16, 14, 20, 0.72);
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
+/* ----------------------------------------------------------
+   INNER — contenido centrado verticalmente, izq alineado
+   ---------------------------------------------------------- */
+.inner {
+  position: relative;
+  z-index: 3;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 clamp(32px, 8vw, 120px);
+  gap: clamp(20px, 3vh, 36px);
+}
+
+/* ----------------------------------------------------------
+   TÍTULO ROW
+   ---------------------------------------------------------- */
+.titleRow {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.8vh, 20px);
+}
+
+.title {
+  font-family: var(--font-feixen);
+  font-size: clamp(40px, 7vw, 96px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.95);
+  text-transform: uppercase;
+}
+
+.titleLine {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ----------------------------------------------------------
+   DATA ROW — email izquierda | redes derecha
+   ---------------------------------------------------------- */
+.dataRow {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(40px, 8vw, 120px);
+}
+
+/* ----------------------------------------------------------
+   DATA GROUP — label + link(s)
+   ---------------------------------------------------------- */
+.dataGroup {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1vh, 10px);
+}
+
+.dataLabel {
+  font-family: var(--font-feixen);
+  font-size: clamp(9px, 0.75vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+  line-height: 1;
+}
+
+/* ----------------------------------------------------------
+   LINKS — estilo igual que social links del MenuOverlay
+   ---------------------------------------------------------- */
+.dataLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-feixen);
+  font-size: clamp(12px, 1.1vw, 15px);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.65);
+  text-decoration: none;
+  transition: color 200ms ease, gap 200ms ease;
+}
+
+.dataLink:hover {
+  color: rgba(255, 255, 255, 0.95);
+  gap: 10px;
+}
+
+.dataArrow {
+  font-size: 0.9em;
+  line-height: 1;
+  transition: transform 200ms ease;
+}
+
+.dataLink:hover .dataArrow {
+  transform: translate(2px, -2px);
+}
+
+/* ----------------------------------------------------------
+   SOCIAL LIST — links apilados verticalmente
+   ---------------------------------------------------------- */
+.socialList {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4px, 0.8vh, 8px);
+}
+
+/* ----------------------------------------------------------
+   RESPONSIVE
+   ---------------------------------------------------------- */
+@media (max-width: 600px) {
+  .inner {
+    padding: 0 clamp(20px, 6vw, 40px);
+  }
+
+  .dataRow {
+    flex-direction: column;
+    gap: clamp(24px, 5vh, 40px);
+  }
+
+  .title {
+    font-size: clamp(36px, 14vw, 72px);
+  }
+}
