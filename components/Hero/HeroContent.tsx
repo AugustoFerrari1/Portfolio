@@ -47,8 +47,14 @@ export default function HeroContent({ isLoaded = false }: HeroContentProps) {
         </div>
 
         <p className={styles.heroDescription}>
-          Soy estudiante de ingeniería en sistemas, backend developer
-          <br />&amp; arquitecto de infraestructura y bases de datos
+          <span className={styles.descriptionDesktop}>
+            Soy estudiante de ingeniería en sistemas, backend developer
+            <br />&amp; arquitecto de infraestructura y bases de datos
+          </span>
+          <span className={styles.descriptionMobile}>
+            <span>Soy estudiante de ingeniería en sistemas, backend developer</span>
+            <span>&amp; arquitecto de infraestructura y bases de datos</span>
+          </span>
         </p>
 
         <div className={styles.heroCtas}>
@@ -56,7 +62,7 @@ export default function HeroContent({ isLoaded = false }: HeroContentProps) {
             className={styles.ctaLink}
             onClick={() => navigate('projects')}
           >
-            <span>→</span> ver mis proyectos
+            <span>→</span> mis proyectos
           </button>
           <button
             className={styles.ctaLink}

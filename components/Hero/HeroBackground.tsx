@@ -6,10 +6,10 @@ import styles from './Hero.module.css';
 
 /* ─── Parallax depth config ───────────────────────────────────────────────── */
 const BLOB_CONFIGS = [
-  { depth: 0.60, maxPx: 26, lerpFactor: 0.055 }, // TL — medium, mid-layer
-  { depth: 1.00, maxPx: 30, lerpFactor: 0.065 }, // TR — closest, most reactive
-  { depth: 0.40, maxPx: 20, lerpFactor: 0.045 }, // BL — furthest, most subtle
-  { depth: 0.75, maxPx: 28, lerpFactor: 0.060 }, // BR — medium-close
+  { depth: 0.60, maxPx: 26, lerpFactor: 0.075 }, // TL — medium, mid-layer
+  { depth: 1.00, maxPx: 30, lerpFactor: 0.085 }, // TR — closest, most reactive
+  { depth: 0.40, maxPx: 20, lerpFactor: 0.065 }, // BL — furthest, most subtle
+  { depth: 0.75, maxPx: 28, lerpFactor: 0.080 }, // BR — medium-close
 ] as const;
 
 interface HeroBackgroundProps {

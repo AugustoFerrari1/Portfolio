@@ -1,0 +1,73 @@
+@media (max-width: 480px) {
+
+  /* On small screens, hide the top blobs — they overlap content too much */
+  .blobWrapperTL {
+    top: -20%;
+    left: -70%;
+  }
+
+  .blobWrapperTR {
+    display: none;
+  }
+
+  .blobWrapperBL {
+    display: none;
+  }
+
+  .blobWrapperBR {
+    bottom: -14%;
+  }
+
+}
+
+@media (max-width: 480px) {
+
+  /* On small screens, hide the top blobs — they overlap content too much */
+  .blobWrapperTL {
+    top: -20%;
+    left: -70%;
+  }
+
+  .blobWrapperTR {
+    top: 55%;
+    right: -30%;
+  }
+
+  .blobWrapperBL {
+    display: none;
+  }
+
+  .blobWrapperBR {
+    display: none;
+  }
+
+
+}
+
+
+@media (max-width: 480px) {
+
+  /* On small screens, hide the top blobs — they overlap content too much */
+  .blobWrapperTL {
+    top: -20%;
+    left: -70%;
+  }
+
+  .blobWrapperTR {
+    display: none;
+  }
+
+  .blobWrapperBR {
+    display: none;
+  }
+
+  .blobSvgBL {
+    width: clamp(486px, 63vw, 950px);
+  }
+
+  .blobWrapperBL {
+    bottom: -17%;
+    left: 3%;
+  }
+
+}

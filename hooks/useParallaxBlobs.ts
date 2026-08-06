@@ -32,12 +32,32 @@ function lerp(a: number, b: number, t: number): number {
   return a + (b - a) * t;
 }
 
-// ─── Idle drift constants ──────────────────────────────────────────────────────
-const IDLE_DELAY_MS = 1800; // ms before idle drift kicks in
-const IDLE_PHASES = [0, Math.PI * 0.65, Math.PI * 1.3, Math.PI * 1.95];
-const IDLE_FREQ = 0.00035;   // rad/ms — slow floating (~18s full cycle)
-const IDLE_AMPLITUDE = 0.28; // fraction of maxPx used for idle drift
+// ─── Hook ─────────────────────────────────────────────────────────────────────
 
+/**
+ * `useParallaxBlobs`
+ *
+ * Tracks the normalized mouse position (-1 to +1 per axis) and smoothly
+ * translates each registered DOM element by an amount proportional to its
+ * `depth` factor. Animation is driven by `requestAnimationFrame` + linear
+ * interpolation, producing a natural inertia / spring feel.
+ *
+ * Each blob can have an independent `depth`, `maxPx`, and `lerpFactor`,
+ * making it easy to fake parallax depth:
+ *   - depth 1.0 → "closest" blob, moves most
+ *   - depth 0.4 → "furthest" blob, barely moves
+ *
+ * Usage:
+ * ```tsx
+ * const { setRef } = useParallaxBlobs([
+ *   { depth: 1.0, maxPx: 30, lerpFactor: 0.065 }, // blob 0
+ *   { depth: 0.6, maxPx: 26, lerpFactor: 0.055 }, // blob 1
+ * ]);
+ *
+ * <div ref={setRef(0)} />
+ * <div ref={setRef(1)} />
+ * ```
+ */
 export function useParallaxBlobs(configs: ParallaxBlobConfig[]) {
   // Mutable refs — never trigger re-renders
   const blobRefs = useRef<(HTMLElement | null)[]>(
@@ -50,24 +70,24 @@ export function useParallaxBlobs(configs: ParallaxBlobConfig[]) {
   // Normalized mouse position: -1 (left/top) → +1 (right/bottom)
   const mouse = useRef({ nx: 0, ny: 0 });
 
-  // Idle tracking
-  const lastMouseMoveTime = useRef<number>(performance.now());
-  const isIdle = useRef<boolean>(false);
-
   const rafId = useRef<number | null>(null);
 
+  /**
+   * Returns a callback ref for the given blob index.
+   * Attach directly to a DOM element: `ref={setRef(0)}`
+   */
   const setRef =
     (index: number) => (el: HTMLElement | null) => {
       blobRefs.current[index] = el;
     };
 
   useEffect(() => {
+    const lastApplied = configs.map(() => ({ x: -999, y: -999 }));
+
     // ── Mouse tracking ──────────────────────────────────────────────────────
     const onMouseMove = (e: MouseEvent) => {
       mouse.current.nx = (e.clientX / window.innerWidth) * 2 - 1;
       mouse.current.ny = (e.clientY / window.innerHeight) * 2 - 1;
-      lastMouseMoveTime.current = performance.now();
-      isIdle.current = false;
     };
 
     // When mouse leaves viewport, ease back to origin
@@ -80,14 +100,7 @@ export function useParallaxBlobs(configs: ParallaxBlobConfig[]) {
     window.addEventListener('mouseleave', onMouseLeave, { passive: true });
 
     // ── RAF animation loop ──────────────────────────────────────────────────
-    const tick = (timestamp: number) => {
-      const timeSinceMove = timestamp - lastMouseMoveTime.current;
-      const mouseIsIdle = timeSinceMove > IDLE_DELAY_MS;
-
-      if (mouseIsIdle && !isIdle.current) {
-        isIdle.current = true;
-      }
-
+    const tick = () => {
       const { nx, ny } = mouse.current;
 
       configs.forEach((cfg, i) => {
@@ -97,27 +110,26 @@ export function useParallaxBlobs(configs: ParallaxBlobConfig[]) {
         const maxPx = cfg.maxPx ?? 25;
         const speed = cfg.lerpFactor ?? 0.06;
 
-        let targetX: number;
-        let targetY: number;
+        // Target offset: move in the direction of the mouse, scaled by depth
+        const targetX = nx * maxPx * cfg.depth;
+        const targetY = ny * maxPx * cfg.depth;
 
-        if (mouseIsIdle) {
-          const phase = IDLE_PHASES[i] ?? 0;
-          const t = timestamp * IDLE_FREQ;
-          const idleAmp = maxPx * cfg.depth * IDLE_AMPLITUDE;
-          targetX = Math.sin(t + phase) * idleAmp;
-          targetY = Math.cos(t * 0.73 + phase) * idleAmp;
-        } else {
-          targetX = nx * maxPx * cfg.depth;
-          targetY = ny * maxPx * cfg.depth;
+        // Smooth interpolation — creates the inertia/spring effect
+        const currentX = lerp(offsets.current[i].x, targetX, speed);
+        const currentY = lerp(offsets.current[i].y, targetY, speed);
+
+        offsets.current[i].x = currentX;
+        offsets.current[i].y = currentY;
+
+        // Only update DOM style if position changed significantly
+        if (
+          Math.abs(currentX - lastApplied[i].x) > 0.01 ||
+          Math.abs(currentY - lastApplied[i].y) > 0.01
+        ) {
+          lastApplied[i].x = currentX;
+          lastApplied[i].y = currentY;
+          el.style.transform = `translate3d(${currentX.toFixed(2)}px, ${currentY.toFixed(2)}px, 0)`;
         }
-
-        offsets.current[i].x = lerp(offsets.current[i].x, targetX, speed);
-        offsets.current[i].y = lerp(offsets.current[i].y, targetY, speed);
-
-        const writeX = Math.round(offsets.current[i].x * 100) / 100;
-        const writeY = Math.round(offsets.current[i].y * 100) / 100;
-
-        el.style.transform = `translate3d(${writeX}px, ${writeY}px, 0)`;
       });
 
       rafId.current = requestAnimationFrame(tick);
@@ -125,6 +137,7 @@ export function useParallaxBlobs(configs: ParallaxBlobConfig[]) {
 
     rafId.current = requestAnimationFrame(tick);
 
+    // ── Cleanup ─────────────────────────────────────────────────────────────
     return () => {
       window.removeEventListener('mousemove', onMouseMove);
       window.removeEventListener('mouseleave', onMouseLeave);

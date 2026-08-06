@@ -31,7 +31,7 @@ export default function Contact() {
 
         {/* ── Título ── */}
         <div className={styles.titleRow}>
-          <h1 className={styles.title}>CONTACTO</h1>
+          <h1 className={styles.title}>CONTACT</h1>
           <div className={styles.titleLine} />
         </div>
 

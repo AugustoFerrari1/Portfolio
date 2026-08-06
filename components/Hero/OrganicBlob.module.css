@@ -1,20 +1,111 @@
+/* ─── Blob Animations ─────────────────────────────────────────────────────── */
+
+/* Top-left: drift lento + ligera rotación */
+@keyframes blobDriftTL {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+
+  25% {
+    transform: translate(6px, -8px) rotate(1.2deg) scale(1.012);
+  }
+
+  50% {
+    transform: translate(-4px, 5px) rotate(-0.8deg) scale(0.988);
+  }
+
+  75% {
+    transform: translate(8px, 3px) rotate(1.5deg) scale(1.008);
+  }
+
+  100% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1);
+  }
+}
+
+/* Top-right: flotación vertical suave + leve skew */
+@keyframes blobDriftTR {
+  0% {
+    transform: translate(0px, 0px) skewX(0deg) scale(1);
+  }
+
+  30% {
+    transform: translate(-7px, 9px) skewX(0.4deg) scale(1.01);
+  }
+
+  60% {
+    transform: translate(5px, -6px) skewX(-0.3deg) scale(0.99);
+  }
+
+  100% {
+    transform: translate(0px, 0px) skewX(0deg) scale(1);
+  }
+}
+
+/* Bottom-left: balanceo lateral + pulso muy suave */
+@keyframes blobDriftBL {
+  0% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+
+  20% {
+    transform: translate(9px, -4px) rotate(-1deg);
+  }
+
+  50% {
+    transform: translate(-5px, 7px) rotate(0.6deg);
+  }
+
+  80% {
+    transform: translate(6px, -3px) rotate(-0.8deg);
+  }
+
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+/* Bottom-right: movimiento circular suave */
+@keyframes blobDriftBR {
+  0% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+
+  25% {
+    transform: translate(-8px, -6px) scale(1.015) rotate(0.9deg);
+  }
+
+  50% {
+    transform: translate(4px, 8px) scale(0.985) rotate(-1.1deg);
+  }
+
+  75% {
+    transform: translate(7px, -5px) scale(1.01) rotate(0.5deg);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1) rotate(0deg);
+  }
+}
+
 /* ─── Variant Classes ─────────────────────────────────────────────────────── */
-/*
-  NOTE (perf): CSS drift keyframes (blobDriftTL/TR/BL/BR) were removed.
-  They animated `transform` on the same element as the JS parallax hook
-  (useParallaxBlobs), causing a conflict where the JS overwrote the CSS
-  animation every frame anyway — spending GPU budget for nothing.
 
-  Idle drift is now handled directly in useParallaxBlobs via a sinusoidal
-  offset when the mouse hasn't moved, giving full control from one place.
+.blob--tl {
+  animation: blobDriftTL 20s ease-in-out infinite;
+  will-change: transform;
+}
 
-  `will-change: transform` is declared only on `.blobParallax` in
-  Hero.module.css (the JS layer), not here — no need to double it.
-*/
+.blob--tr {
+  animation: blobDriftTR 10s ease-in-out infinite;
+  will-change: transform;
+}
 
-.blob--tl,
-.blob--tr,
-.blob--bl,
+.blob--bl {
+  animation: blobDriftBL 12s ease-in-out infinite;
+  will-change: transform;
+}
+
 .blob--br {
-  display: block;
+  animation: blobDriftBR 10s ease-in-out infinite;
+  will-change: transform;
 }

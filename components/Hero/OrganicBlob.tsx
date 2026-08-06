@@ -13,7 +13,7 @@ interface OrganicBlobProps {
   style?: React.CSSProperties;
   /**
    * Tint color to recolor the 3D blob while keeping its original volume & shading.
-   * Defaults to '#262030ff'.
+   * Defaults to '#796f8a' matching the background.
    */
   tintColor?: string;
   /**
@@ -44,6 +44,14 @@ const DIMENSIONS: Record<BlobVariant, { width: number; height: number }> = {
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+/**
+ * `OrganicBlob`
+ *
+ * Renders a pre-generated PNG blob asset (public/blobs/blob-{variant}.png)
+ * using next/image. Uses `saturate(0)` to desaturate base image hues combined with
+ * `mix-blend-mode: color` in tone #796f8a to achieve a neutral tone matching #796f8a background,
+ * preserving glossy 3D specular highlights.
+ */
 export default function OrganicBlob({
   variant,
   className,
@@ -72,6 +80,8 @@ export default function OrganicBlob({
           height: 'auto',
           display: 'block',
           filter: `saturate(${saturate}) brightness(${brightness}) contrast(${contrast})`,
+          transform: 'translateZ(0)',
+          willChange: 'transform',
         }}
         priority
         draggable={false}
@@ -90,9 +100,12 @@ export default function OrganicBlob({
             WebkitMaskRepeat: 'no-repeat',
             maskRepeat: 'no-repeat',
             pointerEvents: 'none',
+            transform: 'translateZ(0)',
+            willChange: 'transform',
           }}
         />
       )}
     </div>
   );
 }
+

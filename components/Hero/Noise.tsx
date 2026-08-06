@@ -32,7 +32,37 @@ const Noise = ({
 
     let frame = 0;
     let animationId: number;
-    const canvasSize = 1024;
+    const canvasSize = 512;
+
+    // Pre-generate 4 offscreen noise pattern canvases once
+    const patternDim = 256;
+    const NUM_PATTERNS = 4;
+    const patterns: CanvasPattern[] = [];
+
+    for (let p = 0; p < NUM_PATTERNS; p++) {
+      const offCanvas = document.createElement('canvas');
+      offCanvas.width = patternDim;
+      offCanvas.height = patternDim;
+      const offCtx = offCanvas.getContext('2d');
+      if (offCtx) {
+        const imageData = offCtx.createImageData(patternDim, patternDim);
+        const data = imageData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const value = Math.random() * 255;
+          data[i] = value;
+          data[i + 1] = value;
+          data[i + 2] = value;
+          data[i + 3] = patternAlpha;
+        }
+        offCtx.putImageData(imageData, 0, 0);
+        const pat = ctx.createPattern(offCanvas, 'repeat');
+        if (pat) patterns.push(pat);
+      }
+    }
+
+    if (patterns.length === 0) return;
+
+    let patternIdx = 0;
 
     const resize = () => {
       if (!canvas) return;
@@ -42,19 +72,20 @@ const Noise = ({
       canvas.style.height = '100%';
     };
 
-    // Pre-create ImageData to prevent garbage collection frame lag
-    const imageData = ctx.createImageData(canvasSize, canvasSize);
-    const data = imageData.data;
-
     const drawGrain = () => {
-      for (let i = 0; i < data.length; i += 4) {
-        const value = Math.random() * 255;
-        data[i] = value;
-        data[i + 1] = value;
-        data[i + 2] = value;
-        data[i + 3] = patternAlpha;
-      }
-      ctx.putImageData(imageData, 0, 0);
+      ctx.clearRect(0, 0, canvasSize, canvasSize);
+      const pattern = patterns[patternIdx];
+      patternIdx = (patternIdx + 1) % patterns.length;
+
+      // Apply random offset to shift noise position dynamically each refresh
+      const offsetX = Math.floor(Math.random() * patternDim);
+      const offsetY = Math.floor(Math.random() * patternDim);
+
+      ctx.save();
+      ctx.translate(-offsetX, -offsetY);
+      ctx.fillStyle = pattern;
+      ctx.fillRect(0, 0, canvasSize + patternDim, canvasSize + patternDim);
+      ctx.restore();
     };
 
     const loop = () => {
@@ -93,3 +124,4 @@ const Noise = ({
 };
 
 export default Noise;
+
