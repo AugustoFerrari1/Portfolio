@@ -5,7 +5,7 @@ import styles from './OrganicBlob.module.css';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
-export type BlobVariant = 'tl' | 'tr' | 'bl' | 'br';
+export type BlobVariant = 'tl' | 'tr' | 'bl' | 'br' | 'tc';
 
 interface OrganicBlobProps {
   variant: BlobVariant;
@@ -40,6 +40,7 @@ const DIMENSIONS: Record<BlobVariant, { width: number; height: number }> = {
   tr: { width: 950, height: 750 },
   bl: { width: 760, height: 700 },
   br: { width: 780, height: 700 },
+  tc: { width: 1200, height: 1200 },
 };
 
 // ─── Component ────────────────────────────────────────────────────────────────
@@ -108,4 +109,3 @@ export default function OrganicBlob({
     </div>
   );
 }
-

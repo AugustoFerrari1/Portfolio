@@ -10,6 +10,7 @@ const BLOB_CONFIGS = [
   { depth: 1.00, maxPx: 30, lerpFactor: 0.085 }, // TR — closest, most reactive
   { depth: 0.40, maxPx: 20, lerpFactor: 0.065 }, // BL — furthest, most subtle
   { depth: 0.75, maxPx: 28, lerpFactor: 0.080 }, // BR — medium-close
+  { depth: 0.20, maxPx: 14, lerpFactor: 0.045 }, // TC - top center, very subtle
 ] as const;
 
 interface HeroBackgroundProps {
@@ -34,6 +35,12 @@ export default function HeroBackground({ isLoaded = false }: HeroBackgroundProps
       <div className={`${styles.blobWrapper} ${styles.blobWrapperTR}`}>
         <div ref={setRef(1)} className={styles.blobParallax}>
           <OrganicBlob variant="tr" className={styles.blobSvgTR} />
+        </div>
+      </div>
+
+      <div className={`${styles.blobWrapper} ${styles.blobWrapperTC}`}>
+        <div ref={setRef(4)} className={styles.blobParallax}>
+          <OrganicBlob variant="tc" className={styles.blobSvgTC} />
         </div>
       </div>
 

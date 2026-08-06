@@ -109,3 +109,22 @@
   animation: blobDriftBR 10s ease-in-out infinite;
   will-change: transform;
 }
+
+@keyframes blobDriftTC {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  50% {
+    transform: translate(0px, 5px) scale(1.006);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.blob--tc {
+  animation: blobDriftTC 16s ease-in-out infinite;
+  will-change: transform;
+}

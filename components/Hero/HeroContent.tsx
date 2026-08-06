@@ -72,11 +72,6 @@ export default function HeroContent({ isLoaded = false }: HeroContentProps) {
           </button>
         </div>
       </div>
-
-      {/* Marker lateral */}
-      <div className={styles.sideMarker} aria-hidden="true">
-        <div className={styles.sideMarkerDot} />
-      </div>
     </section>
   );
 }

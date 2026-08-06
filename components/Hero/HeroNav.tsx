@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import AnimatedBurgerIcon from './AnimatedBurgerIcon';
 import styles from './Hero.module.css';
 
@@ -19,7 +20,16 @@ export default function HeroNav({ isOpen, onToggle }: HeroNavProps) {
   return (
     <header className={styles.nav}>
       {/* Esquina izquierda vacía */}
-      <div className={styles.logoPlaceholder} />
+      <div className={styles.navLogo} aria-label="Augusto Ferrari">
+        <Image
+          src="/logofir.png"
+          alt="Augusto Ferrari"
+          width={779}
+          height={607}
+          className={styles.navLogoImage}
+          priority
+        />
+      </div>
 
       {/* Controles de la derecha: EN/ES, Luna, Burger */}
       <div className={styles.navRightControls}>
