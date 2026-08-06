@@ -188,3 +188,12 @@
         width: 100%;
     }
 }
+
+@media (max-width: 640px) {
+    .counter {
+        left: 50%;
+        transform: translateX(-50%);
+        justify-content: center;
+        width: max-content;
+    }
+}

@@ -29,7 +29,8 @@ export default function FrameLayout({ children }: FrameLayoutProps) {
         Ingeniería &amp; Software
       </div>
       <div className={styles.edgeBottom} aria-hidden="true">
-        Personal Design
+        <span className={styles.edgeBottomDesktop}>Personal Design</span>
+        <span className={styles.edgeBottomMobile}>Ingeniería &amp; Software</span>
       </div>
     </div>
   );

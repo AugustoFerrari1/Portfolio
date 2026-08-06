@@ -17,8 +17,11 @@ const barlow = Barlow({
 });
 
 export const metadata: Metadata = {
-  title: 'Portfolio',
+  title: 'Augusto',
   description: 'Design & Development Portfolio',
+  icons: {
+    icon: '/logoPort.ico',
+  },
 };
 
 export default function RootLayout({

@@ -124,6 +124,10 @@
   animation: pulse 2.4s ease-in-out infinite;
 }
 
+.edgeBottomMobile {
+  display: none;
+}
+
 @keyframes pulse {
   0%, 100% { opacity: 0.2; transform: scale(0.8); }
   50%       { opacity: 1;   transform: scale(1); }
@@ -171,6 +175,13 @@
    RESPONSIVE
    ---------------------------------------------------------- */
 @media (max-width: 640px) {
+  .frame {
+    inset: 28px var(--frame-margin);
+  }
+
   .edgeLeft, .edgeRight { display: none; }
+  .edgeBottom { height: 28px; }
+  .edgeBottomDesktop { display: none; }
+  .edgeBottomMobile { display: inline; }
   .cornerTL, .cornerTR, .cornerBL, .cornerBR { display: none; }
 }
