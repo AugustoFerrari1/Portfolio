@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter, Barlow } from 'next/font/google';
 import FrameLayout from '@/components/FrameLayout';
+import { LanguageProvider } from '@/components/LanguageContext';
 import './globals.css';
 
 const inter = Inter({
@@ -32,9 +33,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${barlow.variable}`}>
       <body>
-        <FrameLayout>
-          {children}
-        </FrameLayout>
+        <LanguageProvider>
+          <FrameLayout>
+            {children}
+          </FrameLayout>
+        </LanguageProvider>
       </body>
     </html>
   );

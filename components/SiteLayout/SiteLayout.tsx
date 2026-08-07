@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useNav } from '@/components/NavContext';
 import HeroNav from '@/components/Hero/HeroNav';
-import MenuOverlay from '@/components/Hero/MenuOverlay';
+import MenuOverlay from '@/components/BurgerThings/MenuOverlay';
 import HeroContent from '@/components/Hero/HeroContent';
 import HeroBackground from '@/components/Hero/HeroBackground';
 import Projects from '@/components/Projects';

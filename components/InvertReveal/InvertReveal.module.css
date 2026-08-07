@@ -1,0 +1,26 @@
+/* ============================================================
+   InvertReveal.module.css — revela una copia del texto (con
+   otro color) dentro de un círculo que sigue al mouse.
+   ============================================================ */
+
+.wrapper {
+  position: relative;
+  display: inline-block;
+  isolation: isolate;
+}
+
+/* Copia base: define el tamaño real de la caja, siempre visible */
+.base {
+  display: inline-block;
+}
+
+/* Copia revelada: superpuesta exacto arriba de la base, recortada
+   en círculo. Al ser texto real, fuera de las letras no hay nada
+   pintado (transparente) -> nunca se ve un "blob" de color. */
+.overlayText {
+  position: absolute;
+  inset: 0;
+  display: inline-block;
+  pointer-events: none;
+  clip-path: circle(var(--ir, 0px) at var(--ix, 50%) var(--iy, 50%));
+}

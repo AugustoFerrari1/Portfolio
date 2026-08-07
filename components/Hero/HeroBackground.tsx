@@ -1,6 +1,6 @@
 'use client';
 
-import OrganicBlob from './OrganicBlob';
+import OrganicBlob from '../Blobs/OrganicBlob';
 import { useParallaxBlobs } from '@/hooks/useParallaxBlobs';
 import styles from './Hero.module.css';
 

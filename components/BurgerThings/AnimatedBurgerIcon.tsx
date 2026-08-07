@@ -1,6 +1,6 @@
 'use client';
 
-import styles from './Hero.module.css';
+import styles from '../Hero/Hero.module.css';
 
 interface AnimatedBurgerIconProps {
   isHovered: boolean;

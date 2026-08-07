@@ -1,14 +1,15 @@
 'use client';
 
+import { useLanguage } from '@/components/LanguageContext';
 import { useNav, type ViewId } from '@/components/NavContext';
-import Noise from './Noise';
-import styles from './Hero.module.css';
+import Noise from '../Noise/Noise';
+import styles from '../Hero/Hero.module.css';
 
-const NAV_ITEMS: { num: string; label: string; view: ViewId }[] = [
-  { num: '01', label: 'Inicio', view: 'home' },
-  { num: '02', label: 'Proyectos', view: 'projects' },
-  { num: '03', label: 'Sobre mí', view: 'about' },
-  { num: '04', label: 'Contacto', view: 'contact' },
+const NAV_ITEMS: { num: string; view: ViewId }[] = [
+  { num: '01', view: 'home' },
+  { num: '02', view: 'projects' },
+  { num: '03', view: 'about' },
+  { num: '04', view: 'contact' },
 ];
 
 const SOCIAL_ITEMS = [
@@ -23,6 +24,7 @@ interface MenuOverlayProps {
 
 export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
   const { navigate } = useNav();
+  const { t } = useLanguage();
 
   function handleNav(view: ViewId) {
     navigate(view);
@@ -34,10 +36,8 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
       className={`${styles.overlay} ${isOpen ? styles.overlayOpen : ''}`}
       aria-hidden={!isOpen}
     >
-      {/* Capa de Blur & Root BG traslúcido */}
       <div className={styles.overlayBlur} aria-hidden="true" />
 
-      {/* Noise sobre el blur, bajo el nav */}
       <Noise
         patternSize={250}
         patternRefreshInterval={2}
@@ -46,9 +46,8 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
         mixBlendMode="overlay"
       />
 
-      {/* Nav left-aligned, centrada verticalmente */}
       <nav className={styles.overlayNav}>
-        {NAV_ITEMS.map(({ num, label, view }, i) => (
+        {NAV_ITEMS.map(({ num, view }, i) => (
           <button
             key={num}
             className={styles.overlayItem}
@@ -56,13 +55,12 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
             onClick={() => handleNav(view)}
           >
             <span className={styles.overlayLabelWrapper}>
-              <span className={styles.overlayLabel}>{label}</span>
+              <span className={styles.overlayLabel}>{t.menu.items[view]}</span>
               <span className={styles.overlayNum}>{num}</span>
             </span>
           </button>
         ))}
 
-        {/* Redes sociales debajo de la última opción */}
         <div
           className={styles.overlaySocials}
           style={{ transitionDelay: isOpen ? `${NAV_ITEMS.length * 60 + 100}ms` : '0ms' }}
@@ -75,7 +73,15 @@ export default function MenuOverlay({ isOpen, onClose }: MenuOverlayProps) {
               rel="noopener noreferrer"
               className={styles.socialLink}
             >
-              <span className={styles.socialArrow} aria-hidden="true">↗</span>
+              <svg
+                className={styles.socialArrow}
+                aria-hidden="true"
+                viewBox="0 0 12 12"
+                focusable="false"
+              >
+                <path d="M3 3h6v6" />
+                <path d="M9 3 3 9" />
+              </svg>
               <span>{label}</span>
             </a>
           ))}
