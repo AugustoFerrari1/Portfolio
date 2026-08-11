@@ -6,7 +6,9 @@ import Noise from '../Noise/Noise';
 import styles from '../Hero/Hero.module.css';
 import InvertRevealGroup from '@/components/InvertReveal/InvertRevealGroup';
 
-const NAV_ITEMS: { num: string; view: ViewId }[] = [
+type MenuViewId = 'home' | 'projects' | 'about' | 'contact';
+
+const NAV_ITEMS: { num: string; view: MenuViewId }[] = [
   { num: '01', view: 'home' },
   { num: '02', view: 'projects' },
   { num: '03', view: 'about' },

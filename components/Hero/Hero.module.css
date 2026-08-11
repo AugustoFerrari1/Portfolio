@@ -600,8 +600,7 @@
   overflow: visible;
 }
 
-.solidWithWave:hover::after,
-.heroTitle:hover .solidWithWave::after {
+.solidWithWave:hover::after {
   animation: waveScroll 5s linear infinite;
 }
 

@@ -75,6 +75,26 @@ export const copy = {
       socialLabel: 'SOCIAL MEDIA',
       socialAria: 'Visit',
     },
+    projectDetail: {
+      ariaLabel: 'Project details for',
+      visitSite: 'visit site',
+      visitAria: 'Visit',
+      category: 'CATEGORY',
+      year: 'YEAR',
+      role: 'ROLE',
+      client: 'CLIENT',
+      technologies: 'TECHNOLOGIES',
+      galleryAria: 'Gallery for',
+      screenshot: 'screenshot',
+      projects: {
+        'turno-uy': {
+          role: 'Full-stack development',
+          client: 'Personal project',
+          description:
+            'Turno.uy is an appointment management SaaS platform built for barbershops in Uruguay. It enables each business to have its own public booking page, accept 24/7 reservations, and manage their calendar, team, services, clients, cash flow, and finances from a centralized dashboard.\n\nThe system is designed as a multi-tenant application: each barbershop operates independently with its own data, visual configuration, branches, and users. Customers can book without creating an account using a direct link, QR code, or an embeddable widget for external websites.\n\nKey features include automated WhatsApp and email reminders, reservation cancellations, schedule & block management, individual barber profiles, Google Calendar sync, business analytics, reports, reviews, gallery, data export, and subscription plans integrated with Mercado Pago payments.',
+        },
+      },
+    },
   },
   es: {
     frame: {
@@ -145,6 +165,26 @@ export const copy = {
       emailAria: 'Enviar email a',
       socialLabel: 'REDES SOCIALES',
       socialAria: 'Visitar',
+    },
+    projectDetail: {
+      ariaLabel: 'Detalle del proyecto',
+      visitSite: 'visitar sitio',
+      visitAria: 'Visitar',
+      category: 'CATEGORÍA',
+      year: 'AÑO',
+      role: 'ROL',
+      client: 'CLIENTE',
+      technologies: 'TECNOLOGÍAS',
+      galleryAria: 'Galería de',
+      screenshot: 'captura',
+      projects: {
+        'turno-uy': {
+          role: 'Desarrollo full-stack',
+          client: 'Proyecto propio',
+          description:
+            'Turno.uy es una plataforma SaaS de gestión de turnos creada para barberías de Uruguay. Permite que cada negocio tenga su propia página pública de reservas, reciba turnos las 24 horas y administre desde un panel central su agenda, equipo, servicios, clientes, caja y finanzas.\n\nEl sistema está diseñado como una aplicación multi-tenant: cada barbería opera de forma independiente con su propia información, configuración visual, sucursales y usuarios. Los clientes pueden reservar sin crear una cuenta, mediante un enlace directo, código QR o un widget integrable en otros sitios web.\n\nIncluye recordatorios automáticos por WhatsApp y correo, cancelación de reservas, gestión de horarios y bloqueos, perfiles individuales para barberos, sincronización con Google Calendar, estadísticas de negocio, reportes, reseñas, galería, exportación de datos y planes de suscripción con pagos mediante Mercado Pago.',
+        },
+      },
     },
   },
 } as const;

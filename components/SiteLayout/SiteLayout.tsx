@@ -9,6 +9,7 @@ import HeroBackground from '@/components/Hero/HeroBackground';
 import Projects from '@/components/Projects';
 import About from '@/components/About';
 import Contact from '@/components/Contact';
+import ProjectDetail from '@/components/ProjectDetail';
 import CustomCursor from '@/components/CustomCursor';
 import Preloader from '@/components/Preloader/Preloader';
 import styles from './SiteLayout.module.css';
@@ -68,6 +69,14 @@ export default function SiteLayout() {
         aria-hidden={currentView !== 'contact' || menuOpen}
       >
         <Contact />
+      </div>
+
+      {/* Detalle de proyecto */}
+      <div
+        className={`${styles.view} ${currentView === 'project-detail' && !menuOpen ? styles.viewActive : ''}`}
+        aria-hidden={currentView !== 'project-detail' || menuOpen}
+      >
+        <ProjectDetail />
       </div>
 
     </div>

@@ -47,6 +47,8 @@
   --color-text-muted: rgba(255, 255, 255, 0.45);
   --color-text-dim: rgba(255, 255, 255, 0.25);
   --color-hero-title: #979ab9;
+  --color-accent: #979ab9;
+  --color-accent-muted: rgba(151, 154, 185, 0.75);
   --invert-reveal-color: #ffffff;
   --invert-reveal-blend-mode: exclusion;
   --invert-reveal-backdrop-filter: none;
@@ -99,6 +101,8 @@
   --color-text-muted: rgba(70, 58, 100, 0.58);
   --color-text-dim: rgba(80, 70, 110, 0.38);
   --color-hero-title: #5a5272;
+  --color-accent: #5a5272;
+  --color-accent-muted: rgba(90, 82, 114, 0.75);
   --invert-reveal-color: #ffffff;
   --invert-reveal-blend-mode: exclusion;
   --invert-reveal-backdrop-filter: none;
