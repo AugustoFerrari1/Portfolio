@@ -46,6 +46,11 @@
   --color-text: rgba(255, 255, 255, 0.85);
   --color-text-muted: rgba(255, 255, 255, 0.45);
   --color-text-dim: rgba(255, 255, 255, 0.25);
+  --color-hero-title: #979ab9;
+  --invert-reveal-color: #ffffff;
+  --invert-reveal-blend-mode: exclusion;
+  --invert-reveal-backdrop-filter: none;
+  --invert-reveal-isolation: isolate;
 
   /* Frame & Spacing System */
   --frame-margin: clamp(12px, 3vw, 40px);
@@ -75,6 +80,35 @@
 }
 
 /* ============================================================
+   LIGHT MODE TOKENS
+   ============================================================ */
+[data-theme="light"] {
+  /* Background */
+  --color-bg: #e8e8e7;
+  --color-surface: #d8d8d6;
+  --color-surface-hover: #ccccc9;
+  --color-overlay-bg: #e0dfe0;
+
+  /* Borders */
+  --color-border: rgba(70, 60, 100, 0.14);
+  --color-border-subtle: rgba(70, 60, 100, 0.07);
+
+  /* Text — mismos tonos lila del dark mode pero oscurecidos */
+  --color-text-high: rgba(50, 40, 75, 0.97);
+  --color-text: rgba(55, 45, 80, 0.88);
+  --color-text-muted: rgba(70, 58, 100, 0.58);
+  --color-text-dim: rgba(80, 70, 110, 0.38);
+  --color-hero-title: #5a5272;
+  --invert-reveal-color: #ffffff;
+  --invert-reveal-blend-mode: exclusion;
+  --invert-reveal-backdrop-filter: none;
+  --invert-reveal-isolation: isolate;
+
+  /* Scrollbar */
+  --scrollbar-color: rgba(90, 80, 120, 0.22);
+}
+
+/* ============================================================
    GLOBAL RESET
    ============================================================ */
 *,
@@ -88,7 +122,7 @@
 html {
   height: 100dvh;
   overflow: hidden;
-  color-scheme: dark;
+  color-scheme: dark light;
 }
 
 body {

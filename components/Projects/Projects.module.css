@@ -396,3 +396,75 @@
         padding: 16px 20px;
     }
 }
+
+/* ============================================================
+   LIGHT MODE — Projects section overrides
+   ============================================================ */
+
+/* Glassmorphism overlay */
+:global([data-theme="light"]) .blurOverlay {
+  background: rgba(232, 232, 231, 0.78);
+  backdrop-filter: blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+}
+
+/* Floating card */
+:global([data-theme="light"]) .floatingCard {
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    10px 0 40px rgba(80, 70, 120, 0.12),
+    0 0 0 1px rgba(90, 82, 114, 0.12);
+  backdrop-filter: blur(25px) saturate(160%);
+  -webkit-backdrop-filter: blur(25px) saturate(160%);
+}
+
+/* Card overlay gradient */
+:global([data-theme="light"]) .cardOverlay {
+  background: linear-gradient(to bottom,
+    rgba(255, 255, 255, 0.06) 0%,
+    transparent 40%,
+    transparent 70%,
+    rgba(90, 82, 114, 0.08) 100%);
+}
+
+/* List header */
+:global([data-theme="light"]) .listHeader {
+  border-bottom-color: rgba(90, 82, 114, 0.16);
+}
+
+:global([data-theme="light"]) .heading {
+  color: rgba(55, 45, 80, 0.9);
+}
+
+:global([data-theme="light"]) .count {
+  color: rgba(55, 45, 80, 0.35);
+}
+
+/* List items */
+:global([data-theme="light"]) .arrowBadge {
+  color: rgba(55, 45, 80, 0.9);
+}
+
+:global([data-theme="light"]) .title {
+  color: rgba(55, 45, 80, 0.42);
+}
+
+:global([data-theme="light"]) .itemActive .title {
+  color: rgba(55, 45, 80, 0.95);
+}
+
+:global([data-theme="light"]) .category {
+  color: rgba(55, 45, 80, 0.26);
+}
+
+:global([data-theme="light"]) .itemActive .category {
+  color: rgba(55, 45, 80, 0.58);
+}
+
+:global([data-theme="light"]) .itemLine {
+  background: rgba(90, 82, 114, 0.09);
+}
+
+:global([data-theme="light"]) .itemActive .itemLine {
+  background: rgba(90, 82, 114, 0.2);
+}

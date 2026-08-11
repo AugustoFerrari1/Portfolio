@@ -1,0 +1,25 @@
+/* ============================================================
+   InvertReveal.module.css — inversión de color en círculo
+   que sigue al mouse, acotada solo al elemento envuelto
+   ============================================================ */
+
+/* ── Wrapper (standalone Y esclavo) ────────────────────────── */
+/* Crea un nuevo contexto de composición para que mix-blend-mode
+   solo afecte lo que está DENTRO de este wrapper.
+   En modo esclavo: sin padding/margin, el overlay cubre el texto exactamente. */
+.wrapper {
+  position: relative;
+  display: inline-block;
+  isolation: var(--invert-reveal-isolation);
+}
+
+/* ── Overlay ────────────────────────────────────────────────── */
+/* background y mix-blend-mode se setean por JS según las props.
+   --ix / --iy / --ir son actualizados por JS en cada frame.    */
+.overlay {
+  position: absolute;
+  inset: 0;
+  clip-path: circle(var(--ir, 0px) at var(--ix, 50%) var(--iy, 50%));
+  pointer-events: none;
+  overflow: hidden;
+}

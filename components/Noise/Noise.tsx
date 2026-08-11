@@ -14,8 +14,8 @@ interface NoiseProps {
 
 const Noise = ({
   patternSize = 250,
-  patternScaleX = 1,
-  patternScaleY = 1,
+  patternScaleX = 1.4,
+  patternScaleY = 1.5,
   patternRefreshInterval = 2,
   patternAlpha = 9,
   zIndex = 10,

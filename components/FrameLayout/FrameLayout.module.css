@@ -19,7 +19,7 @@
   content: '';
   position: absolute;
   inset: 0;
-  z-index: 0;
+  z-index: 999;
   pointer-events: none;
   opacity: 0.045;
   mix-blend-mode: overlay;
@@ -62,21 +62,22 @@
    ---------------------------------------------------------- */
 .edgeLeft {
   position: fixed;
-  left: 0;
-  top: 50%;
+  left: var(--frame-margin);
+  top: auto;
+  bottom: var(--frame-margin);
   z-index: 100;
-  transform: translateY(-50%) rotate(-90deg);
-  transform-origin: center center;
+  transform: rotate(-90deg);
+  transform-origin: left bottom;
   font-size: 10px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-text-dim);
   white-space: nowrap;
   pointer-events: none;
-  width: var(--frame-margin);
+  width: max-content;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .edgeRight {
@@ -101,19 +102,34 @@
 .edgeBottom {
   position: fixed;
   bottom: 0;
-  left: 50%;
+  left: var(--frame-margin);
   z-index: 100;
-  transform: translateX(-50%);
+  transform: none;
   height: var(--frame-margin);
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap: 6px;
   font-size: 10px;
+  line-height: 1;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-dim);
   pointer-events: none;
+}
+
+:global([data-theme="light"]) .edgeLeft,
+:global([data-theme="light"]) .edgeRight,
+:global([data-theme="light"]) .edgeBottom {
+  color: var(--color-hero-title);
+}
+
+/* Light mode: overlay blend mode is nearly invisible on light backgrounds.
+   Use multiply to create visible dark grain on the light canvas,
+   and bump opacity so the texture reads clearly. */
+:global([data-theme="light"]) .wrapper::before {
+  mix-blend-mode: multiply;
+  opacity: 0.09;
 }
 
 .pulse {
@@ -180,7 +196,14 @@
   }
 
   .edgeLeft, .edgeRight { display: none; }
-  .edgeBottom { height: 28px; }
+  .edgeBottom {
+    left: 0;
+    right: 0;
+    height: 28px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
   .edgeBottomDesktop { display: none; }
   .edgeBottomMobile { display: inline; }
   .cornerTL, .cornerTR, .cornerBL, .cornerBR { display: none; }

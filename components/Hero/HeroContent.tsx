@@ -1,20 +1,44 @@
 'use client';
 
+import { useLanguage } from '@/components/LanguageContext';
 import { useNav } from '@/components/NavContext';
-import Noise from './Noise';
+import Noise from '../Noise/Noise';
 import styles from './Hero.module.css';
+import InvertReveal from '@/components/InvertReveal/InvertReveal';
+import InvertRevealGroup from '@/components/InvertReveal/InvertRevealGroup';
 
 interface HeroContentProps {
   isLoaded?: boolean;
 }
 
+function ArrowIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={styles.ctaArrow}
+    >
+      <path
+        d="M4 12H20M20 12L13 5M20 12L13 19"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export default function HeroContent({ isLoaded = false }: HeroContentProps) {
   const { navigate } = useNav();
+  const { t } = useLanguage();
 
   return (
     <section id="home" className={`${styles.hero} ${isLoaded ? styles.heroLoaded : ''}`}>
 
-      {/* Noise canvas — sobre blobs, debajo del texto */}
       <Noise
         patternSize={250}
         patternRefreshInterval={2}
@@ -23,54 +47,78 @@ export default function HeroContent({ isLoaded = false }: HeroContentProps) {
         mixBlendMode="overlay"
       />
 
-      {/* Contenido central */}
       <div className={styles.heroCenter}>
         <div className={styles.titleContainer}>
-          <h1 className={styles.heroTitle}>
+          {/* InvertRevealGroup: trackea el mouse y emite coordenadas absolutas.
+              Cada InvertReveal hijo mantiene su propio isolation + overlay,
+              pero todos muestran el círculo en la misma posición absoluta.
+              Resultado: el círculo fluye sin cortes entre ambas líneas. */}
+          <InvertRevealGroup
+            radius={17}
+            smoothing={0.25}
+            as="h1"
+            className={styles.heroTitle}
+          >
             <span className={styles.heroLine}>
               <span className={styles.doubleTextOutline}>
-                HOLA, SOY
+                {t.hero.line1Outline}
               </span>{' '}
-              <span className={`${styles.doubleTextSolid} ${styles.solidWithWave}`}>
-                AUGUSTO FERRARI
-              </span>
+              <InvertReveal>
+                <span className={`${styles.doubleTextSolid} ${styles.solidWithWave}`}>
+                  {t.hero.line1Solid}
+                </span>
+              </InvertReveal>
             </span>
             <span className={styles.heroLine}>
               <span className={styles.doubleTextOutline}>
-                INGENIERO EN
+                {t.hero.line2Outline}
               </span>{' '}
-              <span className={`${styles.doubleTextSolid} ${styles.solidWithWave}`}>
-                SISTEMAS
-              </span>
+              <InvertReveal>
+                <span className={`${styles.doubleTextSolid} ${styles.solidWithWave}`}>
+                  {t.hero.line2Solid}
+                </span>
+              </InvertReveal>
             </span>
-          </h1>
+          </InvertRevealGroup>
         </div>
+
 
         <p className={styles.heroDescription}>
           <span className={styles.descriptionDesktop}>
-            Soy estudiante de ingeniería en sistemas, backend developer
-            <br />&amp; arquitecto de infraestructura y bases de datos
+            {t.hero.descriptionLine1}
+            <br />{t.hero.descriptionLine2}
           </span>
           <span className={styles.descriptionMobile}>
-            <span>Soy estudiante de ingeniería en sistemas, backend developer</span>
-            <span>&amp; arquitecto de infraestructura y bases de datos</span>
+            <span>{t.hero.descriptionLine1}</span>
+            <span>{t.hero.descriptionLine2}</span>
           </span>
         </p>
 
-        <div className={styles.heroCtas}>
-          <button
-            className={styles.ctaLink}
-            onClick={() => navigate('projects')}
-          >
-            <span>→</span> mis proyectos
-          </button>
-          <button
-            className={styles.ctaLink}
-            onClick={() => navigate('about')}
-          >
-            <span>→</span>saber más
-          </button>
-        </div>
+        <InvertRevealGroup
+          radius={17}
+          smoothing={0.25}
+          as="div"
+          className={styles.heroCtas}
+        >
+          <div className={styles.heroCtasLine}>
+            <InvertReveal>
+              <button
+                className={styles.ctaLink}
+                onClick={() => navigate('projects')}
+              >
+                <ArrowIcon /> {t.hero.projectsCta}
+              </button>
+            </InvertReveal>
+            <InvertReveal>
+              <button
+                className={styles.ctaLink}
+                onClick={() => navigate('about')}
+              >
+                <ArrowIcon /> {t.hero.aboutCta}
+              </button>
+            </InvertReveal>
+          </div>
+        </InvertRevealGroup>
       </div>
     </section>
   );

@@ -1,0 +1,65 @@
+/* ============================================================
+   InvertRevealGroup.module.css
+   Overlay único a nivel de grupo — el círculo nunca se corta
+   porque cubre toda el área del h1/contenedor con inset negativo.
+   ============================================================ */
+
+/* ── Group overlay (dark mode: white + exclusion) ───────────── */
+/* Se extiende --gr px más allá de cada borde del contenedor.
+   Así el círculo puede "salir" del texto sin cortarse.
+   Las coords --ix / --iy ya incluyen el offset de --gr (ver JS).
+   --ir: radio actual animado (px)
+   --ix / --iy: centro del círculo en el espacio del overlay (px)
+   --gr: radio máximo del grupo, igual al overflow de cada lado  */
+.groupOverlay {
+  position: absolute;
+  top: calc(-1 * var(--gr, 80px));
+  left: calc(-1 * var(--gr, 80px));
+  right: calc(-1 * var(--gr, 80px));
+  bottom: calc(-1 * var(--gr, 80px));
+  clip-path: circle(var(--ir, 0px) at var(--ix, 50%) var(--iy, 50%));
+  pointer-events: none;
+  overflow: hidden;
+  /* background-color y mix-blend-mode se setean via inline style */
+}
+
+/* ── Clone overlay (light mode only) ───────────────────────────
+   Duplica los children dentro del círculo con filter:invert +
+   brightness para producir: fondo negro + texto blanco.
+   - background: var(--color-bg) → beige → invertido → near-black
+   - text heredado del className → invertido + brightened → white
+   - display:none en dark mode → cero costo
+   ─────────────────────────────────────────────────────────────── */
+.cloneOverlay {
+  position: absolute;
+  top: calc(-1 * var(--gr, 80px));
+  left: calc(-1 * var(--gr, 80px));
+  right: calc(-1 * var(--gr, 80px));
+  bottom: calc(-1 * var(--gr, 80px));
+  clip-path: circle(var(--ir, 0px) at var(--ix, 50%) var(--iy, 50%));
+  pointer-events: none;
+  overflow: hidden;
+  background: var(--color-bg);
+  filter: invert(1) brightness(2);
+  display: none; /* oculto en dark mode */
+}
+
+/* Cancel the negative inset so children render at the same position
+   as in the real group — inset: var(--gr) inverts top/left/right/bottom: calc(-gr)  */
+.cloneInner {
+  position: absolute;
+  top: var(--gr, 80px);
+  left: var(--gr, 80px);
+  right: var(--gr, 80px);
+  bottom: var(--gr, 80px);
+  margin: 0;
+}
+
+/* ── Light mode: show clone, hide dark overlay ────────────────── */
+:global([data-theme="light"]) .cloneOverlay {
+  display: block;
+}
+
+:global([data-theme="light"]) .groupOverlay {
+  display: none;
+}

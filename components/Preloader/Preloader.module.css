@@ -95,6 +95,11 @@
     color: rgba(255, 255, 255, 0.92);
 }
 
+:global([data-theme="light"]) .word,
+:global([data-theme="light"]) .word:last-child {
+    color: var(--color-hero-title);
+}
+
 /* ── Words animate IN ── */
 .wordIn {
     opacity: 1;
@@ -139,12 +144,20 @@
     font-family: var(--font-feixen);
 }
 
+:global([data-theme="light"]) .counterLabel {
+    color: color-mix(in srgb, var(--color-hero-title) 60%, transparent);
+}
+
 .counterNum {
     font-size: 11px;
     letter-spacing: 0.06em;
     color: rgba(255, 255, 255, 0.4);
     font-family: var(--font-feixen);
     font-variant-numeric: tabular-nums;
+}
+
+:global([data-theme="light"]) .counterNum {
+    color: var(--color-hero-title);
 }
 
 /* CSS counter trick using animation-based percentage */
@@ -160,6 +173,10 @@
     height: 2px;
     background: rgba(255, 255, 255, 0.06);
     overflow: hidden;
+}
+
+:global([data-theme="light"]) .progressTrack {
+    background: rgba(90, 80, 120, 0.15);
 }
 
 .progressFill {

@@ -750,3 +750,177 @@
     font-size: clamp(36px, 14vw, 64px);
   }
 }
+
+/* ============================================================
+   LIGHT MODE — About section overrides
+   ============================================================ */
+
+/* Glassmorphism overlay — usa color de fondo claro */
+:global([data-theme="light"]) .blurOverlay {
+  background: rgba(232, 232, 231, 0.78);
+  backdrop-filter: blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+}
+
+/* Cert card preview */
+:global([data-theme="light"]) .certPreview {
+  border: 1px solid rgba(90, 82, 114, 0.15);
+  background: rgba(255, 255, 255, 0.55);
+  box-shadow:
+    0 4px 32px rgba(80, 70, 120, 0.12),
+    inset 0 0 0 1px rgba(90, 82, 114, 0.08);
+}
+
+:global([data-theme="light"]) .certLine {
+  background: rgba(90, 82, 114, 0.1);
+}
+
+:global([data-theme="light"]) .certSeal {
+  border-color: rgba(90, 82, 114, 0.15);
+}
+
+:global([data-theme="light"]) .certOverlayText {
+  background: rgba(240, 238, 245, 0.82);
+}
+
+:global([data-theme="light"]) .certTitle {
+  color: rgba(55, 45, 80, 0.92);
+}
+
+:global([data-theme="light"]) .certIssuer {
+  color: rgba(55, 45, 80, 0.45);
+}
+
+:global([data-theme="light"]) .certYear {
+  color: rgba(55, 45, 80, 0.28);
+}
+
+/* Slider dots */
+:global([data-theme="light"]) .sliderDot {
+  border-color: rgba(90, 82, 114, 0.32);
+}
+
+:global([data-theme="light"]) .sliderDotActive {
+  background: rgba(90, 82, 114, 0.7);
+  border-color: rgba(90, 82, 114, 0.7);
+}
+
+/* Slider buttons */
+:global([data-theme="light"]) .sliderBtn {
+  background: rgba(90, 82, 114, 0.07);
+  border-color: rgba(90, 82, 114, 0.14);
+  color: rgba(55, 45, 80, 0.55);
+}
+
+:global([data-theme="light"]) .sliderBtn:hover {
+  background: rgba(90, 82, 114, 0.14);
+  border-color: rgba(90, 82, 114, 0.26);
+  color: rgba(55, 45, 80, 0.9);
+}
+
+:global([data-theme="light"]) .sliderCount {
+  color: rgba(55, 45, 80, 0.28);
+}
+
+/* Avatar */
+:global([data-theme="light"]) .avatarRing {
+  border-color: rgba(90, 82, 114, 0.2);
+}
+
+:global([data-theme="light"]) .avatarInitials {
+  background: rgba(90, 82, 114, 0.07);
+  border-color: rgba(90, 82, 114, 0.14);
+  color: rgba(55, 45, 80, 0.85);
+}
+
+:global([data-theme="light"]) .avatarBadge {
+  background: rgba(240, 238, 245, 0.85);
+  border-color: rgba(90, 82, 114, 0.14);
+  color: rgba(55, 45, 80, 0.7);
+}
+
+/* Stats */
+:global([data-theme="light"]) .statValue {
+  color: rgba(55, 45, 80, 0.92);
+}
+
+:global([data-theme="light"]) .statLabel {
+  color: rgba(55, 45, 80, 0.38);
+}
+
+/* Eyebrow */
+:global([data-theme="light"]) .eyebrow {
+  color: rgba(55, 45, 80, 0.32);
+}
+
+/* Name — same lila but darker */
+:global([data-theme="light"]) .name {
+  color: rgba(55, 45, 80, 0.9);
+}
+
+:global([data-theme="light"]) .doubleTextSolid {
+  color: #5a5272;
+  -webkit-text-fill-color: #5a5272;
+}
+
+:global([data-theme="light"]) .nameOutline {
+  -webkit-text-stroke: 1.25px #5a5272;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Bio */
+:global([data-theme="light"]) .bio {
+  color: rgba(55, 45, 80, 0.52);
+}
+
+/* Divider */
+:global([data-theme="light"]) .divider {
+  background: rgba(90, 82, 114, 0.1);
+}
+
+/* Skills */
+:global([data-theme="light"]) .skillsLabel {
+  color: rgba(55, 45, 80, 0.28);
+}
+
+:global([data-theme="light"]) .skillChip {
+  border-color: rgba(90, 82, 114, 0.14);
+  background: rgba(90, 82, 114, 0.05);
+  color: rgba(55, 45, 80, 0.58);
+}
+
+:global([data-theme="light"]) .skillChip:hover {
+  background: rgba(90, 82, 114, 0.12);
+  border-color: rgba(90, 82, 114, 0.28);
+  color: rgba(55, 45, 80, 0.9);
+}
+
+/* Download button */
+:global([data-theme="light"]) .downloadCardBtn {
+  border-color: rgba(90, 82, 114, 0.2);
+  color: rgba(55, 45, 80, 0.8);
+  -webkit-text-fill-color: rgba(55, 45, 80, 0.8);
+}
+
+:global([data-theme="light"]) .downloadCardBtn svg {
+  stroke: rgba(55, 45, 80, 0.8);
+}
+
+:global([data-theme="light"]) .downloadCardBtn:hover {
+  border-color: rgba(90, 82, 114, 0.5);
+  color: rgba(55, 45, 80, 0.98);
+  -webkit-text-fill-color: rgba(55, 45, 80, 0.98);
+}
+
+/* Mobile doc buttons */
+:global([data-theme="light"]) .mobileDocBtn {
+  background: rgba(90, 82, 114, 0.06);
+  border-color: rgba(90, 82, 114, 0.16);
+  color: rgba(55, 45, 80, 0.9);
+}
+
+:global([data-theme="light"]) .mobileDocBtn:hover {
+  background: rgba(90, 82, 114, 0.12);
+  border-color: rgba(90, 82, 114, 0.3);
+}
