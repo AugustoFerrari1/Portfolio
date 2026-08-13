@@ -18,12 +18,16 @@ const DOCUMENT_FILES = [
   {
     id: 1,
     color: '#00e5ff',
-    file: '/docs/cv-augustoferrari.pdf',
-    downloadName: 'CV-Augusto-Ferrari.pdf',
+    hasLanguages: true,
+    fileEs: '/docs/cv-augustoferrari.pdf',
+    fileEn: '/docs/cv-augustoferrari.pdf',
+    downloadNameEs: 'CV-Augusto-Ferrari-ES.pdf',
+    downloadNameEn: 'CV-Augusto-Ferrari-EN.pdf',
   },
   {
     id: 2,
     color: '#2563eb',
+    hasLanguages: false,
     file: '/docs/certificado.pdf',
     downloadName: 'Certificado-PHP-Augusto-Ferrari.pdf',
   },
@@ -65,6 +69,7 @@ export default function About() {
             <div className={styles.sliderTrack}>
               {documents.map((doc, i) => {
                 const offset = i - active;
+                const previewSrc = doc.hasLanguages ? doc.fileEs : doc.file;
                 return (
                   <div
                     key={doc.id}
@@ -78,27 +83,63 @@ export default function About() {
                   >
                     <div className={styles.certPreview}>
                       <iframe
-                        src={`${doc.file}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                        src={`${previewSrc}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                         className={styles.pdfIframe}
                         title={doc.title}
                       />
                       <div className={styles.certOverlayText}>
                         <span className={styles.certTitle}>{doc.title}</span>
-                        <a
-                          href={doc.file}
-                          download={doc.downloadName}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.downloadCardBtn}
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-                            <polyline points="7 10 12 15 17 10" />
-                            <line x1="12" y1="15" x2="12" y2="3" />
-                          </svg>
-                          <span>{t.about.downloadPdf}</span>
-                        </a>
+                        {doc.hasLanguages ? (
+                          <div className={styles.downloadCardGroup} onClick={(e) => e.stopPropagation()}>
+                            <span className={styles.downloadLabel}>{t.about.downloadPdf}:</span>
+                            <div className={styles.downloadCardBtns}>
+                              <a
+                                href={doc.fileEs}
+                                download={doc.downloadNameEs}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.downloadCardBtn}
+                              >
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                  <polyline points="7 10 12 15 17 10" />
+                                  <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                <span>{t.about.downloadEs}</span>
+                              </a>
+                              <a
+                                href={doc.fileEn}
+                                download={doc.downloadNameEn}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={styles.downloadCardBtn}
+                              >
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                  <polyline points="7 10 12 15 17 10" />
+                                  <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
+                                <span>{t.about.downloadEn}</span>
+                              </a>
+                            </div>
+                          </div>
+                        ) : (
+                          <a
+                            href={doc.file}
+                            download={doc.downloadName}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={styles.downloadCardBtn}
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                              <polyline points="7 10 12 15 17 10" />
+                              <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                            <span>{t.about.downloadPdf}</span>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -126,22 +167,66 @@ export default function About() {
 
           <div className={styles.mobileDocButtons}>
             {documents.map((doc) => (
-              <a
-                key={doc.id}
-                href={doc.file}
-                download={doc.downloadName}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.mobileDocBtn}
-              >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                  <polyline points="14 2 14 8 20 8" />
-                  <path d="M12 18v-6" />
-                  <path d="m9 15 3 3 3-3" />
-                </svg>
-                <span>{t.about.download} {doc.title}</span>
-              </a>
+              <div key={doc.id} className={styles.mobileDocCard}>
+                <div className={styles.mobileDocInfo}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <path d="M12 18v-6" />
+                    <path d="m9 15 3 3 3-3" />
+                  </svg>
+                  <span>{doc.title}</span>
+                </div>
+                <div className={styles.mobileDocActions}>
+                  {doc.hasLanguages ? (
+                    <>
+                      <a
+                        href={doc.fileEs}
+                        download={doc.downloadNameEs}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.mobileDocLangBtn}
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="7 10 12 15 17 10" />
+                          <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>{t.about.downloadEs}</span>
+                      </a>
+                      <a
+                        href={doc.fileEn}
+                        download={doc.downloadNameEn}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.mobileDocLangBtn}
+                      >
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                          <polyline points="7 10 12 15 17 10" />
+                          <line x1="12" y1="15" x2="12" y2="3" />
+                        </svg>
+                        <span>{t.about.downloadEn}</span>
+                      </a>
+                    </>
+                  ) : (
+                    <a
+                      href={doc.file}
+                      download={doc.downloadName}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={styles.mobileDocLangBtn}
+                    >
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                      </svg>
+                      <span>{t.about.downloadPdf}</span>
+                    </a>
+                  )}
+                </div>
+              </div>
             ))}
           </div>
         </div>

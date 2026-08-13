@@ -695,31 +695,42 @@
   filter: contrast(1.05) brightness(0.9);
 }
 
-.downloadCardBtn {
-  margin-top: 10px;
-  display: inline-flex;
+.downloadCardGroup {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.downloadLabel {
+  font-size: 10px;
+  font-family: var(--font-feixen);
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.downloadCardBtns {
+  display: flex;
   align-items: center;
   gap: 8px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  /* Aurora en el texto */
-  background-image: linear-gradient(135deg, #3B82F6, #0D9488, #1E3A8A, #10B981, #475569, #3B82F6);
-  background-size: 300% 300%;
-  animation: aurora 8s ease-in-out infinite alternate;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0.85);
-  color: rgba(255, 255, 255, 0.85);
-  background-image: none;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.downloadCardBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   font-family: var(--font-feixen);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 600;
-  padding: 8px 16px;
+  padding: 5px 12px;
   border-radius: 100px;
   text-decoration: none;
-  transition: transform 200ms ease, border-color 200ms ease, color 200ms ease;
+  color: rgba(255, 255, 255, 0.9);
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease, color 200ms ease;
 }
 
 .downloadCardBtn svg {
@@ -728,10 +739,10 @@
 }
 
 .downloadCardBtn:hover {
-  transform: translateY(-2px) scale(1.03);
-  border-color: rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px) scale(1.04);
+  border-color: rgba(255, 255, 255, 0.5);
+  background: rgba(255, 255, 255, 0.16);
   color: #fff;
-  -webkit-text-fill-color: #fff;
 }
 
 .mobileDocButtons {
@@ -763,29 +774,74 @@
     width: 100%;
   }
 
-  .mobileDocBtn {
+  .mobileDocCard {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 12px;
     width: 100%;
-    padding: 14px 20px;
+    padding: 12px 18px;
     background: rgba(255, 255, 255, 0.06);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 14px;
     color: rgba(255, 255, 255, 0.9);
-    font-family: var(--font-feixen);
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     transition: background 200ms ease, border-color 200ms ease;
   }
 
-  .mobileDocBtn:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(255, 255, 255, 0.3);
+  .mobileDocCard:hover {
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.25);
+  }
+
+  .mobileDocInfo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-feixen);
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.92);
+  }
+
+  .mobileDocInfo svg {
+    flex-shrink: 0;
+    stroke: rgba(255, 255, 255, 0.75);
+  }
+
+  .mobileDocActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .mobileDocLangBtn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: rgba(255, 255, 255, 0.95);
+    font-family: var(--font-feixen);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 200ms ease, border-color 200ms ease, transform 200ms ease;
+  }
+
+  .mobileDocLangBtn svg {
+    flex-shrink: 0;
+    stroke: currentColor;
+  }
+
+  .mobileDocLangBtn:hover {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.45);
+    transform: translateY(-1px);
   }
 
   .leftColumn {
@@ -935,31 +991,54 @@
   --about-accent-muted: rgba(85, 66, 122, 0.74);
 }
 
-/* Download button */
+/* Download button & cards in Light mode */
+:global([data-theme="light"]) .downloadLabel {
+  color: rgba(55, 45, 80, 0.55);
+}
+
 :global([data-theme="light"]) .downloadCardBtn {
-  border-color: rgba(90, 82, 114, 0.2);
-  color: rgba(55, 45, 80, 0.8);
-  -webkit-text-fill-color: rgba(55, 45, 80, 0.8);
+  background: rgba(90, 82, 114, 0.08);
+  border-color: rgba(90, 82, 114, 0.22);
+  color: rgba(55, 45, 80, 0.85);
 }
 
 :global([data-theme="light"]) .downloadCardBtn svg {
-  stroke: rgba(55, 45, 80, 0.8);
+  stroke: rgba(55, 45, 80, 0.85);
 }
 
 :global([data-theme="light"]) .downloadCardBtn:hover {
   border-color: rgba(90, 82, 114, 0.5);
+  background: rgba(90, 82, 114, 0.16);
   color: rgba(55, 45, 80, 0.98);
-  -webkit-text-fill-color: rgba(55, 45, 80, 0.98);
 }
 
-/* Mobile doc buttons */
-:global([data-theme="light"]) .mobileDocBtn {
-  background: rgba(90, 82, 114, 0.06);
-  border-color: rgba(90, 82, 114, 0.16);
+/* Mobile & Tablet doc cards in Light mode */
+:global([data-theme="light"]) .mobileDocCard {
+  background: rgba(255, 255, 255, 0.55);
+  border-color: rgba(90, 82, 114, 0.18);
   color: rgba(55, 45, 80, 0.9);
 }
 
-:global([data-theme="light"]) .mobileDocBtn:hover {
-  background: rgba(90, 82, 114, 0.12);
+:global([data-theme="light"]) .mobileDocCard:hover {
+  background: rgba(255, 255, 255, 0.75);
   border-color: rgba(90, 82, 114, 0.3);
+}
+
+:global([data-theme="light"]) .mobileDocInfo {
+  color: rgba(55, 45, 80, 0.95);
+}
+
+:global([data-theme="light"]) .mobileDocInfo svg {
+  stroke: rgba(55, 45, 80, 0.75);
+}
+
+:global([data-theme="light"]) .mobileDocLangBtn {
+  background: rgba(90, 82, 114, 0.08);
+  border-color: rgba(90, 82, 114, 0.22);
+  color: rgba(55, 45, 80, 0.9);
+}
+
+:global([data-theme="light"]) .mobileDocLangBtn:hover {
+  background: rgba(90, 82, 114, 0.16);
+  border-color: rgba(90, 82, 114, 0.45);
 }

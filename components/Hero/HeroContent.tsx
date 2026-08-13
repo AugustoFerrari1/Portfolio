@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import { useNav } from '@/components/NavContext';
 import Noise from '../Noise/Noise';
@@ -33,11 +34,24 @@ function ArrowIcon() {
 }
 
 export default function HeroContent({ isLoaded = false }: HeroContentProps) {
-  const { navigate } = useNav();
+  const { navigate, currentView } = useNav();
   const { t } = useLanguage();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (isLoaded && currentView === 'home') {
+      setIsVisible(false);
+      const frame = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setIsVisible(true));
+      });
+      return () => cancelAnimationFrame(frame);
+    } else {
+      setIsVisible(false);
+    }
+  }, [isLoaded, currentView]);
 
   return (
-    <section id="home" className={`${styles.hero} ${isLoaded ? styles.heroLoaded : ''}`}>
+    <section id="home" className={`${styles.hero} ${isVisible ? styles.heroLoaded : ''}`}>
 
       <Noise
         patternSize={250}
