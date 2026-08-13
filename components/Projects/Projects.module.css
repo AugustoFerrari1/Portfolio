@@ -268,9 +268,9 @@
 
 .heading {
     font-family: var(--font-feixen);
-    font-size: clamp(22px, 3.2vw, 44px);
-    font-weight: 700;
-    letter-spacing: -0.02em;
+    font-size: clamp(30px, 4.5vw, 60px);
+    font-weight: 800;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
     color: rgba(255, 255, 255, 0.9);
     line-height: 1;
@@ -372,25 +372,69 @@
 }
 
 /* ----------------------------------------------------------
+   ENTRANCE ANIMATION (Bottom-to-Top staggered)
+   ---------------------------------------------------------- */
+.listHeader,
+.item {
+    opacity: 0;
+    transform: translateY(40px);
+    will-change: transform, opacity;
+}
+
+.sectionActive .item {
+    animation: projectFadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(0.1s + var(--item-index, 0) * 0.15s);
+}
+
+.sectionActive .listHeader {
+    animation: projectFadeInUp 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: calc(0.1s + var(--total-items, 1) * 0.15s + 0.12s);
+}
+
+@keyframes projectFadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ----------------------------------------------------------
    RESPONSIVE
    ---------------------------------------------------------- */
 @media (max-width: 768px) {
     .inner {
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        min-height: 100dvh;
+        padding: 60px 20px 20px 20px;
     }
 
     .leftColumn {
-        padding: 16px 20px;
-    }
-
-    .floatingCard {
-        max-width: 100%;
-        aspect-ratio: 16 / 10;
+        display: none;
     }
 
     .rightColumn {
-        padding: 16px 20px;
+        width: 100%;
+        height: auto;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 1;
+    }
+
+    .tableWrapper {
+        height: auto;
+        width: 100%;
+        max-width: 500px;
     }
 }
 

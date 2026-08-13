@@ -1,9 +1,11 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import Noise from '@/components/Noise/Noise';
 import styles from './Contact.module.css';
 import InvertRevealGroup from '@/components/InvertReveal/InvertRevealGroup';
+import { useNav } from '@/components/NavContext';
 
 const EMAIL = 'augustoferrari@gmail.com';
 
@@ -14,9 +16,27 @@ const SOCIAL_ITEMS = [
 
 export default function Contact() {
   const { t } = useLanguage();
+  const { currentView } = useNav();
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (currentView === 'contact') {
+      setIsVisible(false);
+      const frame = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setIsVisible(true));
+      });
+      return () => cancelAnimationFrame(frame);
+    } else {
+      setIsVisible(false);
+    }
+  }, [currentView]);
 
   return (
-    <section id="contact" className={styles.section} aria-label={t.contact.aria}>
+    <section
+      id="contact"
+      className={`${styles.section} ${isVisible ? styles.sectionVisible : ''}`}
+      aria-label={t.contact.aria}
+    >
       <div className={styles.blurOverlay} aria-hidden="true" />
 
       <Noise
@@ -28,14 +48,7 @@ export default function Contact() {
       />
 
       <div className={styles.inner}>
-        <div className={styles.titleRow}>
-          <h1 className={styles.title}>{t.contact.heading}</h1>
-          <div className={styles.titleLine} />
-        </div>
-
-        {/* Un solo InvertRevealGroup cubre todo el dataRow.
-            pointer-events: none en el overlay → los clicks/hover
-            llegan directamente a los links, sin interferencia. */}
+        {/* dataRow anima primero (DOM primero en column-reverse = visualmente abajo → aparece antes) */}
         <InvertRevealGroup
           radius={22}
           smoothing={0.25}
@@ -58,7 +71,8 @@ export default function Contact() {
                 <path d="M3 3h6v6" />
                 <path d="M9 3 3 9" />
               </svg>
-              <span>{EMAIL}</span>
+              <span className={styles.emailDesktop}>{EMAIL}</span>
+              <span className={styles.emailMobile}>gmail</span>
             </a>
           </div>
 
@@ -89,6 +103,12 @@ export default function Contact() {
             </div>
           </div>
         </InvertRevealGroup>
+
+        {/* titleRow anima después (delay mayor en CSS) */}
+        <div className={styles.titleRow}>
+          <h1 className={styles.title}>{t.contact.heading}</h1>
+          <div className={styles.titleLine} />
+        </div>
       </div>
     </section>
   );

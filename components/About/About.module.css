@@ -181,6 +181,47 @@
 }
 
 /* ----------------------------------------------------------
+   ENTRANCE ANIMATIONS — triggered by .sectionVisible
+   ---------------------------------------------------------- */
+
+.leftColumn,
+.name,
+.bio,
+.divider,
+.skillsSection {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+@keyframes aboutFadeUp {
+  0%   { opacity: 0; transform: translateY(40px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* leftColumn — primer elemento en aparecer */
+.sectionVisible .leftColumn {
+  animation: aboutFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+}
+
+/* rightColumn — sus hijos animados de abajo a arriba con stagger */
+.sectionVisible .skillsSection {
+  animation: aboutFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
+}
+
+.sectionVisible .divider {
+  animation: aboutFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.14s forwards;
+}
+
+.sectionVisible .bio {
+  animation: aboutFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.20s forwards;
+}
+
+.sectionVisible .name {
+  animation: aboutFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.26s forwards;
+}
+
+/* ----------------------------------------------------------
    COLUMNA IZQUIERDA — Slider de certificados
    ---------------------------------------------------------- */
 .leftColumn {
@@ -549,11 +590,16 @@
   gap: clamp(16px, 2.5vh, 28px);
 }
 
-.eyebrow {
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  color: rgba(255, 255, 255, 0.3);
+
+/* Subtítulo "About Me" encima del slider — igual al heading de Projects/Contact */
+.sectionHeading {
+  font-family: var(--font-feixen);
+  font-size: clamp(30px, 4.5vw, 60px);
+  font-weight: 800;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1;
 }
 
 .name {
@@ -768,6 +814,10 @@
   -webkit-backdrop-filter: blur(40px) saturate(160%);
 }
 
+:global([data-theme="light"]) .sectionHeading {
+  color: rgba(55, 45, 80, 0.9);
+}
+
 /* Cert card preview */
 :global([data-theme="light"]) .certPreview {
   border: 1px solid rgba(90, 82, 114, 0.15);
@@ -852,11 +902,6 @@
 
 :global([data-theme="light"]) .statLabel {
   color: rgba(55, 45, 80, 0.38);
-}
-
-/* Eyebrow */
-:global([data-theme="light"]) .eyebrow {
-  color: rgba(55, 45, 80, 0.32);
 }
 
 /* Name — same lila but darker */

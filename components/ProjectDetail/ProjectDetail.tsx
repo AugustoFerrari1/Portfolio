@@ -10,7 +10,7 @@ import InvertReveal from '@/components/InvertReveal/InvertReveal';
 import InvertRevealGroup from '@/components/InvertReveal/InvertRevealGroup';
 
 export default function ProjectDetail() {
-  const { selectedProject, closeProject } = useNav();
+  const { selectedProject, closeProject, currentView } = useNav();
   const { t } = useLanguage();
   const pd = t.projectDetail;
   const [isVisible, setIsVisible] = useState(false);
@@ -20,19 +20,24 @@ export default function ProjectDetail() {
   const frameRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!selectedProject) {
+    if (!selectedProject || currentView !== 'project-detail') {
       setIsVisible(false);
       return;
     }
 
+    // Resetear primero para que las animaciones CSS se reinicien siempre
+    setIsVisible(false);
     setScrollTop(0);
-    containerRef.current?.scrollTo({ top: 0 });
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0;
+    }
+
     const frame = requestAnimationFrame(() => {
       requestAnimationFrame(() => setIsVisible(true));
     });
 
     return () => cancelAnimationFrame(frame);
-  }, [selectedProject]);
+  }, [selectedProject, currentView]);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {

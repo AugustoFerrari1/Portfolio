@@ -545,11 +545,11 @@
 }
 
 .heroLoaded .heroLine:nth-child(1) {
-  animation-delay: 0.18s;
+  animation-delay: 0.70s;
 }
 
 .heroLoaded .heroLine:nth-child(2) {
-  animation-delay: 0.30s;
+  animation-delay: 0.54s;
 }
 
 /* ── ESTILOS DE TEXTO HERO ──────────────────────────────────────────────
@@ -636,7 +636,7 @@
 }
 
 .heroLoaded .heroDescription {
-  animation: heroTextFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.48s forwards;
+  animation: heroTextFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
 }
 
 .ctaArrow {
@@ -667,7 +667,7 @@
 }
 
 .heroLoaded .heroCtasLine {
-  animation: heroTextFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.70s forwards;
+  animation: heroTextFadeUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
 }
 
 @keyframes heroTextFadeUp {
@@ -942,12 +942,22 @@
     flex-wrap: nowrap;
   }
 
+  .overlayNav {
+    padding-left: clamp(24px, 6vw, 40px);
+    padding-right: clamp(24px, 6vw, 40px);
+  }
+
   .overlayLabel {
     font-size: clamp(36px, 12vw, 70px);
   }
 }
 
 @media (max-width: 550px) {
+  .overlayNav {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
   .overlayLabel {
     font-size: clamp(30px, 10vw, 54px);
     transform: scaleX(1.24);

@@ -1,11 +1,12 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import Noise from '@/components/Noise/Noise';
 import styles from './About.module.css';
 import InvertReveal from '@/components/InvertReveal/InvertReveal';
 import InvertRevealGroup from '@/components/InvertReveal/InvertRevealGroup';
+import { useNav } from '@/components/NavContext';
 
 const SKILLS = [
   'TypeScript', 'React', 'Next.js', 'Node.js',
@@ -30,6 +31,7 @@ const DOCUMENT_FILES = [
 
 export default function About() {
   const { t } = useLanguage();
+  const { currentView } = useNav();
   const documents = DOCUMENT_FILES.map((doc, index) => ({
     ...doc,
     ...t.about.documents[index],
@@ -37,9 +39,23 @@ export default function About() {
   const [active, setActive] = useState(0);
   const prev = () => setActive(i => (i - 1 + documents.length) % documents.length);
   const next = () => setActive(i => (i + 1) % documents.length);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    if (currentView === 'about') {
+      // Resetear y re-disparar la animación cada vez que se navega a About
+      setIsVisible(false);
+      const frame = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setIsVisible(true));
+      });
+      return () => cancelAnimationFrame(frame);
+    } else {
+      setIsVisible(false);
+    }
+  }, [currentView]);
 
   return (
-    <section id="about" className={styles.section}>
+    <section id="about" className={`${styles.section} ${isVisible ? styles.sectionVisible : ''}`}>
       <div className={styles.blurOverlay} aria-hidden="true" />
       <Noise patternSize={250} patternRefreshInterval={2} patternAlpha={9} zIndex={2} mixBlendMode="overlay" />
 
@@ -131,7 +147,6 @@ export default function About() {
         </div>
 
         <div className={styles.rightColumn}>
-          <span className={styles.eyebrow}>{t.about.eyebrow}</span>
           <InvertRevealGroup
             radius={55}
             smoothing={0.25}

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useLanguage } from '@/components/LanguageContext';
 import { useNav } from '@/components/NavContext';
 import type { ProjectData } from '@/components/NavContext';
@@ -52,11 +52,29 @@ const PROJECTS: ProjectData[] = [
 
 export default function Projects() {
   const { t } = useLanguage();
-  const { openProject } = useNav();
+  const { openProject, currentView } = useNav();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
+  const [isAnimating, setIsAnimating] = useState(false);
+
+  useEffect(() => {
+    if (currentView === 'projects') {
+      // Resetear y re-disparar con doble rAF para garantizar re-render limpio
+      setIsAnimating(false);
+      const frame = requestAnimationFrame(() => {
+        requestAnimationFrame(() => setIsAnimating(true));
+      });
+      return () => cancelAnimationFrame(frame);
+    } else {
+      setIsAnimating(false);
+    }
+  }, [currentView]);
 
   return (
-    <section id="projects" className={styles.section}>
+    <section
+      id="projects"
+      className={`${styles.section} ${isAnimating ? styles.sectionActive : ''}`}
+      style={{ '--total-items': PROJECTS.length } as React.CSSProperties}
+    >
       <div className={styles.blurOverlay} aria-hidden="true" />
       <Noise patternSize={250} patternRefreshInterval={2} patternAlpha={9} zIndex={2} mixBlendMode="overlay" />
 
@@ -93,16 +111,17 @@ export default function Projects() {
                 onMouseLeave={() => setActiveIndex(null)}
               >
                 {PROJECTS.map((p, i) => {
-                  const isActive = activeIndex === i;
+                  const isRowActive = activeIndex === i;
                   return (
                     <li
                       key={p.id}
-                      className={`${styles.item} ${isActive ? styles.itemActive : ''}`}
+                      className={`${styles.item} ${isRowActive ? styles.itemActive : ''}`}
+                      style={{ '--item-index': i } as React.CSSProperties}
                       onMouseEnter={() => setActiveIndex(i)}
                       onClick={() => openProject(p)}
                     >
                       <div className={styles.itemLeft}>
-                        <span className={`${styles.arrowBadge} ${isActive ? styles.arrowBadgeActive : ''}`}>
+                        <span className={`${styles.arrowBadge} ${isRowActive ? styles.arrowBadgeActive : ''}`}>
                           -&gt;
                         </span>
                         <span className={styles.title}>{p.title}</span>

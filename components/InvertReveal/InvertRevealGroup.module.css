@@ -45,13 +45,18 @@
 }
 
 /* Cancel the negative inset so children render at the same position
-   as in the real group — inset: var(--gr) inverts top/left/right/bottom: calc(-gr)  */
+   as in the real group.
+   top/left/right/bottom: var(--gr) restores the group's original dimensions.
+   width: auto overrides any width:100% inherited via the className prop;
+   without it, width:100% resolves against cloneOverlay (wider than the group)
+   which expands the grid and shifts columns to the right. */
 .cloneInner {
   position: absolute;
   top: var(--gr, 80px);
   left: var(--gr, 80px);
   right: var(--gr, 80px);
   bottom: var(--gr, 80px);
+  width: auto;
   margin: 0;
 }
 

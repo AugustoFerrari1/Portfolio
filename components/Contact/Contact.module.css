@@ -14,6 +14,8 @@
   background: transparent;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 /* ----------------------------------------------------------
@@ -30,17 +32,56 @@
 }
 
 /* ----------------------------------------------------------
-   INNER — contenido centrado verticalmente, izq alineado
+   INNER — contenido centrado en la pantalla con amplio margen lateral
    ---------------------------------------------------------- */
 .inner {
   position: relative;
   z-index: 3;
   flex: 1;
   display: flex;
-  flex-direction: column;
+  /* column-reverse: en DOM primero dataRow (anima antes), luego titleRow (anima después).
+     Visualmente el título queda arriba porque la dirección está invertida. */
+  flex-direction: column-reverse;
   justify-content: center;
-  padding: 0 clamp(32px, 8vw, 120px);
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 clamp(16px, 3vw, 32px);
+  padding-bottom: clamp(60px, 8vh, 120px);
   gap: clamp(20px, 3vh, 36px);
+}
+
+/* ----------------------------------------------------------
+   ENTRANCE ANIMATIONS — triggered by .sectionVisible
+   ---------------------------------------------------------- */
+
+/* Todas las piezas parten invisibles y desplazadas */
+.titleRow,
+.dataRow {
+  opacity: 0;
+  transform: translateY(40px);
+  will-change: transform, opacity;
+}
+
+/* dataRow aparece primero (delay 0.05s) */
+.sectionVisible .dataRow {
+  animation: contactFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+}
+
+/* titleRow aparece después (delay 0.18s) */
+.sectionVisible .titleRow {
+  animation: contactFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+}
+
+@keyframes contactFadeUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ----------------------------------------------------------
@@ -54,16 +95,16 @@
 
 .title {
   font-family: var(--font-feixen);
-  font-size: clamp(40px, 7vw, 96px);
+  font-size: clamp(30px, 4.5vw, 60px);
   font-weight: 800;
-  letter-spacing: -0.03em;
+  letter-spacing: 0.05em;
   line-height: 1;
-  color: rgba(255, 255, 255, 0.95);
+  color: rgba(255, 255, 255, 0.9);
   text-transform: uppercase;
 }
 
 .titleLine {
-  width: 100%;
+  width: calc(100% + clamp(30px, 4vw, 80px));
   height: 1px;
   background: rgba(255, 255, 255, 0.18);
 }
@@ -74,26 +115,30 @@
 .dataRow {
   display: flex;
   align-items: flex-start;
-  gap: clamp(40px, 8vw, 120px);
+  gap: clamp(30px, 6vw, 90px);
 }
 
 /* ----------------------------------------------------------
-   DATA GROUP — label + link(s)
+   DATA GROUP — label a la izquierda, link(s) a la derecha
    ---------------------------------------------------------- */
 .dataGroup {
   display: flex;
-  flex-direction: column;
-  gap: clamp(6px, 1vh, 10px);
+  flex-direction: row;
+  align-items: baseline;
+  gap: clamp(6px, 0.8vw, 12px);
 }
 
 .dataLabel {
   font-family: var(--font-feixen);
-  font-size: clamp(9px, 0.75vw, 11px);
+  font-size: clamp(14px, 1.1vw, 17px);
   font-weight: 700;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.35);
   line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+  width: clamp(140px, 13vw, 170px);
 }
 
 /* ----------------------------------------------------------
@@ -104,17 +149,17 @@
   align-items: center;
   gap: 6px;
   font-family: var(--font-feixen);
-  font-size: clamp(12px, 1.1vw, 15px);
+  font-size: clamp(16px, 1.3vw, 20px);
   font-weight: 400;
   letter-spacing: 0.01em;
   color: rgba(255, 255, 255, 0.65);
   text-decoration: none;
-  transition: color 200ms ease, gap 200ms ease;
+  transition: color 200ms ease;
+  transform: translateY(1px);
 }
 
 .dataLink:hover {
   color: rgba(255, 255, 255, 0.95);
-  gap: 10px;
 }
 
 .dataArrow {
@@ -127,22 +172,29 @@
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: transform 200ms ease, opacity 200ms ease;
+  transition: opacity 200ms ease;
   opacity: 0.85;
 }
 
 .dataLink:hover .dataArrow {
-  transform: translate(2px, -2px);
   opacity: 1;
 }
 
 /* ----------------------------------------------------------
-   SOCIAL LIST — links apilados verticalmente
+   SOCIAL LIST — apilado vertical en bloque a la derecha de la etiqueta
    ---------------------------------------------------------- */
 .socialList {
   display: flex;
   flex-direction: column;
   gap: clamp(4px, 0.8vh, 8px);
+}
+
+.emailDesktop {
+  display: inline;
+}
+
+.emailMobile {
+  display: none;
 }
 
 /* ----------------------------------------------------------
@@ -158,8 +210,12 @@
     gap: clamp(24px, 5vh, 40px);
   }
 
-  .title {
-    font-size: clamp(36px, 14vw, 72px);
+  .emailDesktop {
+    display: none;
+  }
+
+  .emailMobile {
+    display: inline;
   }
 }
 
@@ -176,7 +232,7 @@
 
 /* Title */
 :global([data-theme="light"]) .title {
-  color: rgba(55, 45, 80, 0.95);
+  color: rgba(55, 45, 80, 0.9);
 }
 
 /* Separator line */

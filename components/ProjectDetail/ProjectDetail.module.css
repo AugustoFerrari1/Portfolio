@@ -70,7 +70,7 @@
 }
 
 .sectionVisible .heroBlock {
-  animation: detailFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.05s forwards;
+  animation: detailFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.36s forwards;
 }
 
 .logoCenter {
@@ -86,7 +86,7 @@
 }
 
 .logoCenterVisible {
-  animation: detailPop 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+  animation: detailPop 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
 }
 
 .logoCenter img {
@@ -112,7 +112,7 @@
 }
 
 .sectionVisible .titleRow {
-  animation: detailFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+  animation: detailFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
 }
 
 .projectTitle {
@@ -180,7 +180,7 @@
 }
 
 .sectionVisible .divider {
-  animation: detailScaleX 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.30s forwards;
+  animation: detailScaleX 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
 }
 
 .infoGrid {
@@ -206,19 +206,19 @@
 }
 
 .sectionVisible .metaItem:nth-child(1) {
-  animation: detailFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.34s forwards;
+  animation: detailFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.04s forwards;
 }
 
 .sectionVisible .metaItem:nth-child(2) {
-  animation: detailFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.40s forwards;
+  animation: detailFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s forwards;
 }
 
 .sectionVisible .metaItem:nth-child(3) {
-  animation: detailFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.46s forwards;
+  animation: detailFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.12s forwards;
 }
 
 .sectionVisible .metaItem:nth-child(4) {
-  animation: detailFadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.52s forwards;
+  animation: detailFadeUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.16s forwards;
 }
 
 .metaLabel,
@@ -268,7 +268,7 @@
 }
 
 .sectionVisible .descColumn {
-  animation: detailFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.42s forwards;
+  animation: detailFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.10s forwards;
 }
 
 .descPara {
@@ -289,7 +289,7 @@
 }
 
 .sectionVisible .techSection {
-  animation: detailFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.56s forwards;
+  animation: detailFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.06s forwards;
 }
 
 .techList {
@@ -325,7 +325,7 @@
 }
 
 .sectionVisible .gallery {
-  animation: detailFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.64s forwards;
+  animation: detailFadeUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.02s forwards;
 }
 
 @keyframes detailFadeUp {
