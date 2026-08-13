@@ -739,9 +739,9 @@
 }
 
 /* ----------------------------------------------------------
-   RESPONSIVE
+   RESPONSIVE (Tablets & Mobile)
    ---------------------------------------------------------- */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .inner {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;

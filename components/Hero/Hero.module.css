@@ -1123,30 +1123,17 @@
 }
 
 /* ----------------------------------------------------------
-   BLOB BL — reposicionamiento puntual para tablets portrait
-   (ej. iPad Air 5: 820×1180)
+   BLOB LAYOUT — Reposicionamiento para todas las pantallas de iPad en vertical (portrait)
+   (ej. iPad Mini 744px, iPad / iPad Air 768px-820px, iPad Pro 834px-1024px)
    ---------------------------------------------------------- */
-@media (min-width: 768px) and (max-width: 900px) and (min-height: 1000px) and (max-height: 1300px) {
+@media (min-width: 600px) and (max-width: 1030px) and (orientation: portrait) {
   .blobWrapperTL {
     top: -20%;
+    left: -10%;
   }
 
   .blobWrapperTR {
-    top: 60%;
-    left: -20%;
-  }
-
-  .blobWrapperBL {
     display: none;
-  }
-
-  .blobWrapperTC {
-    display: none;
-  }
-
-  .blobWrapperBR {
-    bottom: -10%;
-    right: -5%;
   }
 }
 
