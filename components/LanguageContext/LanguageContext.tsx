@@ -95,6 +95,15 @@ export const copy = {
         },
       },
     },
+    error: {
+      notFoundCode: '404',
+      notFoundTitle: 'PAGE NOT FOUND',
+      notFoundDescription: 'The page you are looking for does not exist or has been moved.',
+      genericCode: 'ERROR',
+      genericTitle: 'SOMETHING WENT WRONG',
+      genericDescription: 'An unexpected error occurred while loading this section.',
+      backToHome: 'BACK TO HOME',
+    },
   },
   es: {
     frame: {
@@ -185,6 +194,15 @@ export const copy = {
             'Turno.uy es una plataforma SaaS de gestión de turnos creada para barberías de Uruguay. Permite que cada negocio tenga su propia página pública de reservas, reciba turnos las 24 horas y administre desde un panel central su agenda, equipo, servicios, clientes, caja y finanzas.\n\nEl sistema está diseñado como una aplicación multi-tenant: cada barbería opera de forma independiente con su propia información, configuración visual, sucursales y usuarios. Los clientes pueden reservar sin crear una cuenta, mediante un enlace directo, código QR o un widget integrable en otros sitios web.\n\nIncluye recordatorios automáticos por WhatsApp y correo, cancelación de reservas, gestión de horarios y bloqueos, perfiles individuales para barberos, sincronización con Google Calendar, estadísticas de negocio, reportes, reseñas, galería, exportación de datos y planes de suscripción con pagos mediante Mercado Pago.',
         },
       },
+    },
+    error: {
+      notFoundCode: '404',
+      notFoundTitle: 'PÁGINA NO ENCONTRADA',
+      notFoundDescription: 'La página que estás buscando no existe o fue movida.',
+      genericCode: 'ERROR',
+      genericTitle: 'ALGO SALIÓ MAL',
+      genericDescription: 'Ocurrió un error inesperado al cargar esta sección.',
+      backToHome: 'VOLVER AL INICIO',
     },
   },
 } as const;
