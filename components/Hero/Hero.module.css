@@ -35,31 +35,19 @@
 }
 
 /* ----------------------------------------------------------
-   BLUR OVERLAY — invisible en dark mode (blobs son visibles),
-   provee superficie pintada en light mode para que el
-   backdrop-filter del círculo InvertReveal tenga algo que invertir.
-   El .view tiene opacity+transition → crea stacking context →
-   el backdrop-filter NO puede ver HeroBackground (sibling externo).
-   Este div está DENTRO del stacking context y resuelve ese problema.
+   BLUR OVERLAY
    ---------------------------------------------------------- */
 .blurOverlay {
   position: absolute;
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  /* Dark mode: completamente transparente — los blobs pasan */
   background: transparent;
 }
 
-/* En light mode el blurOverlay permanece transparente —
-   la superficie para el backdrop-filter la provee .blobsInner
-   que renderiza HeroBackground adentro del stacking context. */
 
 /* ----------------------------------------------------------
-   BLOBS INNER — HeroBackground renderizado DENTRO del hero
-   en light mode, encima del blurOverlay (z-index 0) y debajo
-   del texto (heroCenter z-index 10). Así el backdrop-filter
-   del círculo InvertReveal ve el fondo claro → invierte a negro.
+   BLOBS INNER — HeroBackground 
    ---------------------------------------------------------- */
 .blobsInner {
   position: absolute;
@@ -69,8 +57,7 @@
 }
 
 /* ----------------------------------------------------------
-   LIGHT BEAM — rayo diagonal desde arriba-derecha
-   (referencia: fondo que quiero.png)
+   LIGHT BEAM 
    ---------------------------------------------------------- */
 .lightBeam {
   position: absolute;
@@ -92,7 +79,7 @@
 }
 
 /* ----------------------------------------------------------
-   GRAIN — textura de ruido intensa (fondo que quiero)
+   GRAIN — textura de ruido intensa 
    ---------------------------------------------------------- */
 .grain {
   position: absolute;
@@ -107,12 +94,8 @@
 }
 
 /* ----------------------------------------------------------
-   BLOB LAYER SYSTEM — 4 dark 3D organic blobs, one per corner
-
-   Two-layer structure to avoid CSS/JS transform conflicts:
-     .blobWrapper   → CSS entry animation  (opacity + translate from corner)
-     .blobParallax  → JS transform         (mousemove parallax via useParallaxBlobs)
-   ---------------------------------------------------------- */
+   BLOB LAYER SYSTEM
+ ---------------------------------------------------------- */
 .blobWrapper {
   position: absolute;
   z-index: 3;
@@ -120,14 +103,11 @@
   opacity: 0;
 }
 
-/* Inner layer — receives translate3d from useParallaxBlobs hook */
 .blobParallax {
   will-change: transform;
-  /* Depth separation from background via CSS drop-shadow */
   filter: drop-shadow(0 20px 52px rgba(0, 0, 0, 0.62));
 }
 
-/* ── Corner anchors — partially overflow viewport edges ── */
 .blobWrapperTL {
   top: -33%;
   left: -22%;
@@ -156,8 +136,6 @@
   z-index: 5;
 }
 
-/* ── SVG / PNG sizing — controls blob scale per corner.
-   On wide screens the third clamp value is the real cap. ── */
 .blobSvgTL {
   width: clamp(520px, 168vw, 920px);
 }
@@ -179,7 +157,6 @@
   width: clamp(420px, 55vw, 740px);
 }
 
-/* ── Entry animations — triggered by .heroLoaded ── */
 .heroLoaded .blobWrapper {
   animation-duration: 1.4s;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -271,9 +248,6 @@
   }
 }
 
-/* (Blob individual styles removed — shapes are now SVG-based via OrganicBlob.tsx.
-    Sizing is handled by .blobSvgTL / TR / BL / BR above.) */
-
 /* ----------------------------------------------------------
    NAV — barra superior interna
    ---------------------------------------------------------- */
@@ -323,7 +297,6 @@
   line-height: 1;
 }
 
-/* Controles superiores derecha: EN, Luna, Burger */
 .navRightControls {
   display: flex;
   align-items: center;
@@ -404,7 +377,6 @@
   transform: translateY(0);
 }
 
-/* Ícono SVG morphing del burger (sin fondo circular) */
 .burgerIconWrapper {
   width: 28px;
   height: 28px;
@@ -553,14 +525,7 @@
 }
 
 /* ── ESTILOS DE TEXTO HERO ──────────────────────────────────────────────
-   Sin efecto 3D/duplicado. Texto plano:
-   Outline words  → solo contorno (stroke), sin relleno.
-   Solid words    → relleno sólido lila/azulado, sin contorno.
    ----------------------------------------------------------------------- */
-
-/* Solo contorno / stroke — sin relleno.
-   Studio Feixen: fuente geométrica con contraformas abiertas y trazos uniformes.
-   Fill transparente + stroke funciona limpio sin artefactos en ninguna letra. */
 .doubleTextOutline {
   display: inline-block;
   white-space: nowrap;
@@ -725,7 +690,6 @@
   align-items: center;
   justify-content: center;
 
-  /* Entrada */
   opacity: 0;
   transform: scale(1.02);
   pointer-events: none;
@@ -747,7 +711,6 @@
   pointer-events: all;
 }
 
-/* Nav alineada a la izquierda, centrada verticalmente */
 .overlayNav {
   position: relative;
   z-index: 10;
@@ -769,14 +732,12 @@
   padding: 2px 0;
   position: relative;
   cursor: pointer;
-  /* Reset button styles */
   background: none;
   border: none;
   font-family: inherit;
   text-align: left;
   width: 100%;
 
-  /* Animación de entrada staggered */
   opacity: 0;
   transform: translateY(16px);
   transition:
@@ -789,7 +750,6 @@
   transform: translateY(0);
 }
 
-/* Wrapper que contiene label + número abajo-derecha */
 .overlayLabelWrapper {
   position: relative;
   display: inline-flex;
@@ -805,7 +765,6 @@
   color: rgba(255, 255, 255, 0.78);
   display: inline-block;
 
-  /* Estado normal: apenas ancho, compacto como referencia */
   transform: scaleX(1.04);
   transform-origin: left center;
   letter-spacing: -0.015em;
@@ -816,13 +775,11 @@
 }
 
 .overlayItem:hover .overlayLabel {
-  /* Se contrae solo por la derecha */
   transform: scaleX(1);
   letter-spacing: -0.025em;
   color: rgba(255, 255, 255, 0.98);
 }
 
-/* Número pegado abajo-derecha de cada label (aparece solo cuando ya se achicaron las letras) */
 .overlayNum {
   font-size: clamp(10px, 0.9vw, 13px);
   letter-spacing: 0.14em;
@@ -1026,8 +983,7 @@
 }
 
 /* ----------------------------------------------------------
-   BLOB SCALING — reducción progresiva por ancho
-   (no toca .blobWrapper* anchors, solo tamaño del SVG)
+   BLOB SCALING
    ---------------------------------------------------------- */
 @media (max-width: 1660px) {
   .blobSvgTL {
@@ -1085,8 +1041,6 @@
 
 /* ----------------------------------------------------------
    BLOB SCALING — reducción progresiva por altura
-   (pantallas bajas: achica muy levemente y empuja apenas
-   los blobs hacia afuera para no tapar el contenido central)
    ---------------------------------------------------------- */
 @media (max-height: 900px) {
   .blobSvgTL {
@@ -1123,17 +1077,33 @@
 }
 
 /* ----------------------------------------------------------
-   BLOB LAYOUT — Reposicionamiento para todas las pantallas de iPad en vertical (portrait)
-   (ej. iPad Mini 744px, iPad / iPad Air 768px-820px, iPad Pro 834px-1024px)
+   BLOB LAYOUT — Reposicionamiento para todas las pantallas de iPad / Tablet en vertical (portrait)
+   (cubre anchos de 481px a 1030px: ej. iPad Air 573px, iPad 575px, iPad Pro 581px, 768px, 834px, 1024px)
    ---------------------------------------------------------- */
-@media (min-width: 600px) and (max-width: 1030px) and (orientation: portrait) {
+@media (min-width: 481px) and (max-width: 1030px) and (orientation: portrait) {
   .blobWrapperTL {
     top: -20%;
     left: -10%;
   }
 
+  /* TR — oculto en tablet portrait */
   .blobWrapperTR {
-    display: none;
+    display: none !important;
+  }
+
+  /* TC (centro) — oculto en tablet portrait */
+  .blobWrapperTC {
+    display: none !important;
+  }             
+
+  .blobWrapperBL {
+    bottom: -15%;  
+    left: -15%;
+  }
+
+  .blobWrapperBR {
+    bottom: 5%; 
+    right: -20%; 
   }
 }
 
@@ -1168,6 +1138,37 @@
 
   .blobWrapperBR {
     bottom: -34%;
+  }
+}
+
+/* ── Overrides específicos para pantallas DevTools (se ejecutan DESPUÉS de max-height 800px) ────── */
+
+/* Pantalla 573x824 / 573x834: sube TL y baja BR 5% */
+@media (min-width: 570px) and (max-width: 574px) {
+  .blobWrapperTL {
+    top: -28% !important;
+  }
+
+  .blobWrapperBR {
+    bottom: 0% !important;
+  }
+}
+
+/* Pantalla 575x767 / 576x767 */
+@media (min-width: 575px) and (max-width: 578px) {
+  .blobWrapperBR {
+    bottom: -1% !important;
+  }
+}
+
+/* Pantalla 581x832 */
+@media (min-width: 579px) and (max-width: 585px) {
+  .blobWrapperBR {
+    bottom: 0% !important;
+  }
+
+  .blobWrapperTL {
+    top: -28% !important;
   }
 }
 
@@ -1228,15 +1229,15 @@
   }
 
   .blobWrapperTR {
-    display: none;
+    display: none !important;
   }
 
   .blobWrapperTC {
-    display: none;
+    display: none !important;
   }
 
   .blobWrapperBR {
-    display: none;
+    display: none !important;
   }
 
   .blobSvgBL {

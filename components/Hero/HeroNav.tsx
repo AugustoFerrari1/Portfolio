@@ -23,8 +23,8 @@ export default function HeroNav({ isOpen, onToggle }: HeroNavProps) {
     const { isLight, toggleTheme } = useTheme();
     const themeBtnRef = useRef<HTMLButtonElement>(null);
 
-    function handleToggleTheme() {
-        toggleTheme();
+    function handleToggleTheme(e: React.MouseEvent<HTMLButtonElement>) {
+        toggleTheme(e);
     }
 
     function handleLogoClick() {

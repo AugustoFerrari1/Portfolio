@@ -9,7 +9,7 @@ type Theme = 'dark' | 'light';
 
 interface ThemeContextValue {
   theme: Theme;
-  toggleTheme: () => void;
+  toggleTheme: (event?: React.MouseEvent | MouseEvent) => void;
   isLight: boolean;
 }
 
@@ -51,7 +51,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const toggleTheme = useCallback(() => {
+  const toggleTheme = useCallback((event?: React.MouseEvent | MouseEvent) => {
     /** Aplica el cambio de tema en React + DOM */
     const doToggle = () => {
       // flushSync garantiza que React actualiza el DOM ANTES de que
@@ -66,9 +66,21 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       });
     };
 
+    // Pasamos las coordenadas del click como variables CSS para que
+    // el blob nazca exactamente desde el botón pulsado.
+    // Si no hay evento (p.ej. teclado), el blob nace desde el centro (50% 50%).
+    if (event && typeof document !== 'undefined') {
+      const clientX = 'clientX' in event ? event.clientX : window.innerWidth / 2;
+      const clientY = 'clientY' in event ? event.clientY : window.innerHeight / 2;
+      const xPct = ((clientX / window.innerWidth) * 100).toFixed(2) + '%';
+      const yPct = ((clientY / window.innerHeight) * 100).toFixed(2) + '%';
+      document.documentElement.style.setProperty('--vt-x', xPct);
+      document.documentElement.style.setProperty('--vt-y', yPct);
+    }
+
     // View Transitions API — Chrome 111+, Edge 111+, Safari 18+
-    // El navegador anima entre el screenshot viejo y el nuevo.
-    // Los @keyframes están definidos en globals.css.
+    // Se usa en todos los dispositivos. En mobile el CSS define
+    // una duración más corta (250ms) para hardware limitado.
     if (typeof document !== 'undefined' && 'startViewTransition' in document) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (document as any).startViewTransition(doToggle);
