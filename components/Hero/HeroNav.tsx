@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/components/LanguageContext';
 import { useNav } from '@/components/NavContext';
@@ -21,6 +21,11 @@ export default function HeroNav({ isOpen, onToggle }: HeroNavProps) {
     const { label, t, toggleLanguage } = useLanguage();
     const { navigate } = useNav();
     const { isLight, toggleTheme } = useTheme();
+    const themeBtnRef = useRef<HTMLButtonElement>(null);
+
+    function handleToggleTheme() {
+        toggleTheme();
+    }
 
     function handleLogoClick() {
         if (isOpen) onToggle();
@@ -66,7 +71,7 @@ export default function HeroNav({ isOpen, onToggle }: HeroNavProps) {
                 </button>
 
                 {/* Toggle Tema (Luna / Sol) */}
-                <button className={styles.themeBtn} onClick={toggleTheme} aria-label={t.nav.toggleTheme}>
+                <button ref={themeBtnRef} className={styles.themeBtn} onClick={handleToggleTheme} aria-label={t.nav.toggleTheme}>
                     {isLight ? (
                         /* Sol — light mode activo */
                         <svg

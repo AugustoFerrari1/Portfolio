@@ -7,7 +7,7 @@ import styles from './Contact.module.css';
 import InvertRevealGroup from '@/components/InvertReveal/InvertRevealGroup';
 import { useNav } from '@/components/NavContext';
 
-const EMAIL = 'augustoferrari@gmail.com';
+const EMAIL = 'aguferrari100@gmail.com';
 
 const SOCIAL_ITEMS = [
   { label: 'instagram', href: 'https://www.instagram.com/aguferrari1/' },

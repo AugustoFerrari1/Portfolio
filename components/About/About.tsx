@@ -19,7 +19,7 @@ const DOCUMENT_FILES = [
     id: 1,
     color: '#00e5ff',
     hasLanguages: true,
-    fileEs: '/docs/cv-augustoferrari.pdf',
+    fileEs: '/docs/cv-augustoferrari.es.pdf',
     fileEn: '/docs/cv-augustoferrari.pdf',
     downloadNameEs: 'CV-Augusto-Ferrari-ES.pdf',
     downloadNameEn: 'CV-Augusto-Ferrari-EN.pdf',
