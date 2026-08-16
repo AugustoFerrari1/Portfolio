@@ -88,6 +88,7 @@ export const copy = {
       technologies: 'TECHNOLOGIES',
       galleryAria: 'Gallery for',
       screenshot: 'screenshot',
+      backToProjects: 'BACK TO PROJECTS SECTION',
       projects: {
         'turno-uy': {
           role: 'Full-stack development',
@@ -190,6 +191,7 @@ export const copy = {
       technologies: 'TECNOLOGÍAS',
       galleryAria: 'Galería de',
       screenshot: 'captura',
+      backToProjects: 'VOLVER A SECCIÓN PROYECTOS',
       projects: {
         'turno-uy': {
           role: 'Desarrollo full-stack',

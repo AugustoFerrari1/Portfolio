@@ -522,3 +522,50 @@
   background: #080808;
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(0, 0, 0, 0.08);
 }
+
+.backSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: clamp(64px, 10vh, 120px);
+  padding-bottom: clamp(32px, 5vh, 64px);
+  width: 100%;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0;
+  color: var(--project-accent-muted);
+  font-family: var(--font-feixen);
+  font-size: clamp(12px, 1.1vw, 14px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  cursor: pointer;
+  transition: color 250ms var(--ease-out), transform 250ms var(--ease-out);
+}
+
+.backButton:hover {
+  color: var(--project-accent);
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.backArrow {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 auto;
+  transition: transform 250ms var(--ease-out);
+}
+
+.backButton:hover .backArrow {
+  transform: translateX(-5px);
+}
+
+
