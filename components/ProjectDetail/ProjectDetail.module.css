@@ -461,15 +461,21 @@
     padding-top: 32px;
   }
 
-  .titleRow,
   .infoGrid,
   .techSection {
     grid-template-columns: 1fr;
   }
 
   .titleRow {
-    align-items: flex-start;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .projectTitle {
+    font-size: clamp(24px, 7vw, 44px);
   }
 
   .metaItem {
