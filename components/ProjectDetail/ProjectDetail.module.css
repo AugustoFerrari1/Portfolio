@@ -446,6 +446,49 @@
   opacity: 0.4;
 }
 
+.scrollHint {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 5px 14px;
+  color: var(--project-accent-muted);
+  font-family: var(--font-feixen);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background: rgba(8, 8, 8, 0.75);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: none;
+  border-radius: 20px;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.scrollHintIcon {
+  width: 13px;
+  height: 13px;
+  flex: 0 0 auto;
+  stroke: currentColor;
+  animation: scrollHintBounce 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollHintBounce {
+  0%, 100% {
+    transform: translateY(-1px);
+  }
+  50% {
+    transform: translateY(3px);
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     --container-padding-x: 20px;
@@ -496,6 +539,10 @@
 
   .galleryImage img {
     height: 100%;
+  }
+
+  .scrollHint {
+    top: clamp(84px, 15vh, 140px);
   }
 }
 

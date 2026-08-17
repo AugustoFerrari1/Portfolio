@@ -88,6 +88,7 @@ export const copy = {
       technologies: 'TECHNOLOGIES',
       galleryAria: 'Gallery for',
       screenshot: 'screenshot',
+      scrollHint: 'Scroll to explore photos',
       backToProjects: 'BACK TO PROJECTS SECTION',
       projects: {
         'turno-uy': {
@@ -191,6 +192,7 @@ export const copy = {
       technologies: 'TECNOLOGÍAS',
       galleryAria: 'Galería de',
       screenshot: 'captura',
+      scrollHint: 'Desliza para ver más fotos',
       backToProjects: 'VOLVER A SECCIÓN PROYECTOS',
       projects: {
         'turno-uy': {
